@@ -1,0 +1,141 @@
+﻿<UserControl x:Class="CCMManager.Views.EditorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+             Background="Transparent">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="32" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="32" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="70" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Row="0"
+              Grid.Column="0"
+              Grid.ColumnSpan="3">
+            <TextBlock x:Name="TitleBlock"
+                       Text="Classroom Editor"
+                       Margin="4,4,4,4"
+                       FontWeight="Bold"
+                       FontSize="14" />
+        </Grid>
+        <Grid Grid.Row="1"
+              Grid.Column="0"
+              Grid.ColumnSpan="3">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Classroom:"
+                           Margin="4,4,4,4"/>
+                <ComboBox x:Name="Classrooms"
+                          Width="150"
+                          IsEditable="True"
+                          Margin="4,4,4,4"/>
+                <Button x:Name="NewRoom"
+                        Content="New"
+                        Margin="4,4,4,4"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2"
+              Grid.Column="0">
+            <DockPanel>
+                <ListBox x:Name="Computers"
+                         ToolTip="Current Computers"
+                         Margin="4,4,4,4"
+                         Padding="0"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         DisplayMemberPath="Name"/>
+            </DockPanel>
+        </Grid>
+        <Grid Grid.Row="2"
+              Grid.Column="1"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <Button x:Name="RemoveSelected"
+                        Margin="4,4,4,4"
+                        ToolTip="Remove the Selected Item"
+                        IsEnabled="{Binding ElementName=Computers, Path=SelectedItems.Count}"
+                        Content="Remove" />
+                <Button x:Name="ClearList"
+                        Margin="4,4,4,4"
+                        IsEnabled="{Binding ElementName=Computers, Path=Items.Count}"
+                        ToolTip="Clear the List"
+                        Content="Clear" />
+            </StackPanel>
+        </Grid>
+        
+        <Grid Grid.Row="2"
+              Grid.Column="2"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+            <StackPanel>
+                <GroupBox Header="Add Single"
+                          Padding="4"
+                          Margin="10,10,4,4"
+                          BorderThickness="2">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Computer Name:"
+                                   Margin="4,4,4,4" />
+                        <TextBox x:Name="SingleComputerName"
+                                 Margin="4,4,4,4"
+                                 Width="150"/>
+                        <Button x:Name="AddSingleComputer"
+                                Margin="4,4,4,4"
+                                IsEnabled="{Binding ElementName=SingleComputerName, Path=Text.Length}"
+                                Width="50"
+                                ToolTip="Add a Single Computer."
+                                Content="Add" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Add From Active Directory"
+                          Margin="10,10,4,4"
+                          Padding="4"
+                          BorderThickness="2">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Computer Filter:"
+                                   Margin="4,4,4,4" />
+                        <TextBox x:Name="ADComputerNameFilter"
+                                 Margin="4,4,4,4"
+                                 Width="150" />
+                        <Button x:Name="AddADComputers"
+                                Margin="4,4,4,4"
+                                Width="50"
+                                IsEnabled="{Binding ElementName=ADComputerNameFilter, Path=Text.Length}"
+                                ToolTip="Search AD and add computers based on matches found."
+                                Content="Add" />
+                        <!--
+                            <fenestra:BizzySpinner x:Name="BizzySpinner"
+                                                   Spin="True"
+                                                   Angle="0"
+                                                   SpinRate="1.0"
+                                                   Width="20"
+                                                   Height="20"
+                                                   IsEnabled="True"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Visibility="Collapsed"
+                                                   Margin="4,4,4,4"/>
+                            -->
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+                    
+        </Grid>
+        <Grid Grid.Row="3"
+              Grid.ColumnSpan="3"
+              HorizontalAlignment="Right">
+            <Button x:Name="Save"
+                    Width="80"
+                    Margin="5,5,5,5"
+                    Content="Save"
+                    IsDefault="True"
+                    IsEnabled="{Binding ElementName=Classrooms, Path=Items.Count}"/>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="CCMManager.Views.ActionsHomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:cm="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <Style x:Key="LinkButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock>
+                        <ContentPresenter />
+                        </TextBlock>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+    </UserControl.Resources>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Right" Margin="4,1,1,1">
+            <Expander ExpandDirection="Down"
+                          IsExpanded="True"
+                          BorderThickness="0,1,1,1"
+                          BorderBrush="Gray"
+                          Margin="2,15,2,0"
+                          Padding="2">
+                <Expander.Header>
+                    <TextBlock Text="Classroom Actions"
+                                   FontSize="12"
+                                   FontWeight="Bold"/>
+                </Expander.Header>
+
+                <StackPanel>
+                    <ItemsControl Margin="10,4,4,4">
+                        <StackPanel>
+                            <Button Content="SCCM Policy Download"
+                                    Style="{StaticResource LinkButton}" />
+                            <Button Content="SCCM Policy Download"
+                                    Style="{StaticResource LinkButton}"/>
+                            <Button Content="SCCM Policy Reset"
+                                    Style="{StaticResource LinkButton}"/>
+                            <Button Content="SCCM DCM Scan"
+                                        Style="{StaticResource LinkButton}"/>
+                            <Button Content="Reboot"
+                                        Style="{StaticResource LinkButton}"/>
+                            <Button Content="Shutdown"
+                                        Style="{StaticResource LinkButton}"/>
+                            <Button Content="Force Log Off"
+                                        Style="{StaticResource LinkButton}"/>
+                            <Button Content="Reboot"
+                                        Style="{StaticResource LinkButton}"/>
+                            <Button Content="GPUpdate Force"
+                                        Style="{StaticResource LinkButton}"/>
+                            <Button Content="Send WOL"
+                                        Style="{StaticResource LinkButton}"/>
+                        </StackPanel>
+                    </ItemsControl>
+                </StackPanel>
+
+            </Expander>
+
+            <Expander ExpandDirection="Down"
+                          IsExpanded="True"
+                          BorderThickness="0,1,1,1"
+                          BorderBrush="Gray"
+                          Margin="1,15,1,0"
+                          Padding="2">
+                <Expander.Header>
+                    <TextBlock Text="Selected Client Actions"
+                                   FontSize="12"
+                                   FontWeight="Bold"/>
+                </Expander.Header>
+                <ItemsControl Margin="10,4,4,4">
+                    <StackPanel>
+                        <Button Content="SCCM Policy Download"
+                                    Style="{StaticResource LinkButton}" />
+                        <Button Content="SCCM Policy Download"
+                                    Style="{StaticResource LinkButton}"/>
+                        <Button Content="SCCM Policy Reset"
+                                    Style="{StaticResource LinkButton}"/>
+                        <Button Content="SCCM DCM Scan"
+                                        Style="{StaticResource LinkButton}"/>
+                        <Button Content="Reboot"
+                                        Style="{StaticResource LinkButton}"/>
+                        <Button Content="Shutdown"
+                                        Style="{StaticResource LinkButton}"/>
+                        <Button Content="Force Log Off"
+                                        Style="{StaticResource LinkButton}"/>
+                        <Button Content="Reboot"
+                                        Style="{StaticResource LinkButton}"/>
+                        <Button Content="GPUpdate Force"
+                                        Style="{StaticResource LinkButton}"/>
+                        <Button Content="Send WOL"
+                                        Style="{StaticResource LinkButton}"/>
+                        <Button Content="View Details..."
+                                        Style="{StaticResource LinkButton}"/>
+                    </StackPanel>
+                </ItemsControl>
+
+            </Expander>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    DockPanel.Dock="Top">
+            <ComboBox x:Name="Classrooms"
+                              Width="120"
+                              Margin="5,4,0,4"
+                              DisplayMemberPath="Name"/>
+            <Button x:Name="EditClassrooms"
+                            Width="Auto"
+                            Background="Transparent"
+                            Margin="5,4,0,4"
+                            ToolTip="Edit Classrooms."
+                    >
+                <Button.Content>
+                    <Image Source="/Resources/Images/folder_edit.png"
+                           Width="16" Height="16"/>
+                </Button.Content>
+            </Button>
+            <ToggleButton x:Name="togStatusPoller" Content="Status Poller"
+                                  Margin="5,4,5,4"/>
+        </StackPanel>
+        <ListView x:Name="ComputerActions"
+                  Margin="4,2,4,4"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  Height="419">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="100" Header="Name" />
+                    <GridViewColumn Width="100" Header="Status" />
+                    <GridViewColumn Width="100" Header="ActionStatus" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </DockPanel>
+</UserControl>
