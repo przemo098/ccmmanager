@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Data\Projects\C#\CCMManager\CCMManager\App.xaml
-7-1233441539
+81860107176
 2-1656670367
-20-476994212
+21-1162626465
 17406291985
-Resources\AddClassroomDialog.xaml;Resources\ShellResources.xaml;Views\ActionsComputerView.xaml;Views\ActionsHomeView.xaml;Views\ActionsView.xaml;Views\EditorView.xaml;Views\ShellView.xaml;
+Resources\AddClassroomDialog.xaml;Resources\ShellResources.xaml;Views\ActionsComputerView.xaml;Views\ActionsHomeView.xaml;Views\ActionsView.xaml;Views\ComputerDetailsView.xaml;Views\EditorView.xaml;Views\ShellView.xaml;
 
 True
 

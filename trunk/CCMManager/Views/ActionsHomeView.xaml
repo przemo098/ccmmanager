@@ -127,7 +127,7 @@
                   Margin="4,2,4,4"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   Height="419"
-                  cm:Message.Attach="[Event MouseDoubleClick] = [Action ViewComputer(SelectedComputer)]">
+                  cm:Message.Attach="[Event MouseDoubleClick] = [Action ViewComputer($dataContext)]">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="100" Header="Name" DisplayMemberBinding="{Binding Name}" />

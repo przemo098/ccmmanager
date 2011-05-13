@@ -87,6 +87,7 @@
     <Compile Include="ViewModels\ActionsComputerViewModel.cs" />
     <Compile Include="ViewModels\ActionsHomeViewModel.cs" />
     <Compile Include="ViewModels\ActionsViewModel.cs" />
+    <Compile Include="ViewModels\ComputerDetailsViewModel.cs" />
     <Compile Include="ViewModels\EditorViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
   </ItemGroup>
@@ -141,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ActionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ComputerDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

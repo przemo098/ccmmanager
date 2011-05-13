@@ -104,6 +104,13 @@ namespace CCMManager.ViewModels
         public void ViewComputer(object sender)
         {
             Console.WriteLine("Hit");
+            var item = sender as ActionsHomeViewModel;
+            Console.WriteLine(item.SelectedComputer.Name);
+
+            var parent = Parent as ActionsViewModel;
+            ComputerDetailsViewModel newItem = new ComputerDetailsViewModel() { DisplayName = item.SelectedComputer.Name };
+            parent.Items.Add(newItem);
+            parent.ActivateItem(newItem);
         }
     }
 }
