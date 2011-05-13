@@ -8,6 +8,7 @@ namespace CCMManager.ViewModels
     using Caliburn.Micro;
     using System.ComponentModel.Composition;
     using Framework;
+    using Models;
 
     /// <summary>
     /// Defines the base itemscontrol and maintains an ActiveItem to hold either:

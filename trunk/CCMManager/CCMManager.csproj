@@ -46,6 +46,7 @@
       <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Silverlight\v4.0\Libraries\Client\System.ComponentModel.Composition.Initialization.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\System.Windows.Interactivity.dll</HintPath>
@@ -74,9 +75,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\ActionHomeModel.cs" />
     <Compile Include="Models\Classroom.cs" />
     <Compile Include="Models\Computer.cs" />
     <Compile Include="Models\ComputerStates.cs" />
+    <Compile Include="Resources\AddClassroomDialog.xaml.cs">
+      <DependentUpon>AddClassroomDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ActiveDirectory.cs" />
     <Compile Include="Services\ClassroomRepository.cs" />
     <Compile Include="ViewModels\ActionsComputerViewModel.cs" />
     <Compile Include="ViewModels\ActionsHomeViewModel.cs" />
@@ -118,6 +124,10 @@
     <Content Include="System.Windows.Interactivity.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\AddClassroomDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\ShellResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

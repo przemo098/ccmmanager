@@ -14,12 +14,13 @@ C:\Data\Projects\C#\CCMManager\CCMManager\bin\Debug\ru\System.ComponentModel.Com
 C:\Data\Projects\C#\CCMManager\CCMManager\bin\Debug\zh-Hans\System.ComponentModel.Composition.Initialization.resources.dll
 C:\Data\Projects\C#\CCMManager\CCMManager\bin\Debug\zh-Hant\System.ComponentModel.Composition.Initialization.resources.dll
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Resources\AddClassroomDialog.baml
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Resources\ShellResources.baml
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\ActionsComputerView.baml
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\ActionsHomeView.baml
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\ActionsView.baml
-C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\EditorView.baml
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\ShellView.baml
+C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Resources\AddClassroomDialog.g.cs
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\ActionsComputerView.g.cs
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\ActionsHomeView.g.cs
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\ActionsView.g.cs
@@ -31,6 +32,7 @@ C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\GeneratedInternalTypeHel
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\CCMManager_MarkupCompile.cache
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\CCMManager_MarkupCompile.lref
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\App.baml
+C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\EditorView.baml
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\CCMManager.g.resources
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\CCMManager.Properties.Resources.resources
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\GenerateResource.read.1.tlog

@@ -5,13 +5,15 @@
     using System.Runtime.Serialization.Formatters.Binary;
     using Caliburn.Micro;
     using Models;
+    using System.ComponentModel.Composition;
 
+    [Export(typeof(ClassroomRepository)), PartCreationPolicy(CreationPolicy.NonShared)]
     public class ClassroomRepository
     {
         private readonly string _stateFile;
         private BindableCollection<Classroom> _classroomStore;
 
-
+        [ImportingConstructor]
         public ClassroomRepository()
         {
             this._stateFile = Path.Combine(
@@ -19,10 +21,16 @@
             this.DeSerialize();
         }
 
-
+        
         public BindableCollection<Classroom> GetClassrooms()
         {
             return new BindableCollection<Classroom>(this._classroomStore);
+        }
+
+        public void SetClassrooms(BindableCollection<Classroom> classrooms)
+        {
+            this._classroomStore = classrooms;
+            this.Serialize();
         }
 
         internal void AddClassroom(Classroom room)
