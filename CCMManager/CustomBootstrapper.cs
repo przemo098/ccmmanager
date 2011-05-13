@@ -12,6 +12,7 @@
 
     using CCMManager.ViewModels;
     using CCMManager.Framework;
+    using CCMManager.Services;
 
 
     public class CustomBootstrapper : Bootstrapper<IShell>
@@ -25,6 +26,7 @@
 
         protected override void Configure()
         {
+            
             container = CompositionHost.Initialize(
             new AggregateCatalog(
                 AssemblySource.Instance.Select(x => new AssemblyCatalog(x)).OfType<ComposablePartCatalog>()
@@ -35,7 +37,7 @@
 
             batch.AddExportedValue<IWindowManager>(new WindowManager());
             batch.AddExportedValue<IEventAggregator>(new EventAggregator());
-            //batch.AddExportedValue(new NetflixCatalog(new Uri(NetflixDataAccess.BaseUri)));
+            //batch.AddExportedValue(new ClassroomRepository());
             batch.AddExportedValue(container);
 
             container.Compose(batch);

@@ -5,6 +5,7 @@ using System.Text;
 
 namespace CCMManager.Models
 {
+    [Serializable]
     public class Computer
     {
         public string Name { get; set; }

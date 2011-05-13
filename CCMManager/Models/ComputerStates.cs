@@ -5,6 +5,7 @@ using System.Text;
 
 namespace CCMManager.Models
 {
+    [Serializable]
     [Flags]
     public enum ComputerStates
     {
