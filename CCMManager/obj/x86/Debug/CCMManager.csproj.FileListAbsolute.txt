@@ -39,3 +39,5 @@ C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\GenerateResource.read.1.
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\CCMManager.exe
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\CCMManager.pdb
+C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\ComputerDetailsView.baml
+C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\ComputerDetailsView.g.cs
