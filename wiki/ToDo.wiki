@@ -7,16 +7,16 @@ This Page is to keep a track of some items to be completed.
 
 = Details =
 
-===UI===
+=== UI ===
 *Computer Details Tab Layout.
 *Make everything Uniform.
 *Implement appropriate resource dictionaries for styling.
 
-===Status Poller===
+=== StatusPoller ===
 *Change from Text feedback to Image.
 *incorporate current User details (maybe in a tooltip?).
 
-===ActionPoller===
+=== ActionPoller ===
 *Form a way of calling/setting multiple actions per client and reporting status in the GUI.
   has to be done on a background thread so as not to hang the UI.
   Similar to the StatusPoller.
