@@ -1,0 +1,15 @@
+#summary StatusPoller Details
+= Introduction =
+
+The StatusPoller attempts to connect to each client in the action list and report its status.
+
+
+= Details =
+
+A first attempt will be made to ping the client, probably using a WMI method, this can result in 'pingable' or 'offline' messages.
+
+Second, an attempt is made to connect to the ROOT\CIMV2 namespace of the remote computer.  This can result in either an error, or Access Denied message.
+
+Thirdly, a check is performed to confirm that the provided hostname for the machine matches the machine name found in ROOT\CIMV2 "Win32_ComputerSystem" class object  "DNSHostName".  This can result in either 'Online' or 'DNSError'.
+
+Fourthly, at the same time as above, if not receiving a DNSError, the current logged on user is retreived.
