@@ -13,3 +13,30 @@ Second, an attempt is made to connect to the ROOT\CIMV2 namespace of the remote 
 Thirdly, a check is performed to confirm that the provided hostname for the machine matches the machine name found in ROOT\CIMV2 "Win32_ComputerSystem" class object  "DNSHostName".  This can result in either 'Online' or 'DNSError'.
 
 Fourthly, at the same time as above, if not receiving a DNSError, the current logged on user is retreived.
+
+== Implementation ==
+
+The gist of the code is as follows:
+
+{{{
+using System.Threading.Tasks;
+
+List<Task> tasks = new List<Task>();
+foreach (object o in SomeList)
+{
+  var t = Task.Factory.StartNew(() =>
+    {
+      var result = SomeLongRunningProcess(o);
+      this.Dispatcher.BeginInvoke(new Action(() =>
+        (Computer)o.Status = States.Online), null);
+    });
+}
+tasks.Add(t);
+
+//If we want to do something when all tasks are done...
+Task.Factory.ContinueWhenAll(tasks.ToArray(), result =>
+  {
+    //Do Something
+    this.Dispatcher.BeginInvoke(new Action(() => updatesomething), null);
+  }
+}}}
