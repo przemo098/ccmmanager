@@ -41,7 +41,7 @@ Task.Factory.ContinueWhenAll(tasks.ToArray(), result =>
   }
 }}}
 
-=== Updating UI from LongRunningProcess ===
+=== Updating UI from Long Running Process ===
 To update an object on the GUI from a long running process we can simply invoke a new action to take place:
 {{{
 this.Dispatcher.BeginInvoke(new Action(() => textBox1.Text += " Updated"));
