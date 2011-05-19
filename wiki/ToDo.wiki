@@ -14,7 +14,8 @@ This Page is to keep a track of some items to be completed.
 
 === StatusPoller ===
   * Change from Text feedback to Image.
-  *incorporate current User details (maybe in a tooltip?).
+  * Incorporate current User details (maybe in a tooltip?).
+  * Add methods for retrieving the MAC address of the remote client, and adding it to the repository for future storage.
 
 === ActionPoller ===
   * Form a way of calling/setting multiple actions per client and reporting status in the GUI.
