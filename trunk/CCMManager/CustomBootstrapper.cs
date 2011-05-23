@@ -28,7 +28,7 @@
         {
             
             container = CompositionHost.Initialize(
-            new AggregateCatalog(
+                new AggregateCatalog(
                 AssemblySource.Instance.Select(x => new AssemblyCatalog(x)).OfType<ComposablePartCatalog>()
                 )
             );

@@ -8,5 +8,6 @@
         <TextBlock Text="This is the view For" />
         <TextBlock x:Name="DisplayName" />
         <TextBlock Text="." />
+        <Button x:Name="Close" Content="Close" />
     </StackPanel>
 </UserControl>

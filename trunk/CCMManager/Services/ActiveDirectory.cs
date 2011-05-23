@@ -16,14 +16,14 @@ namespace CCMManager.Services
     public class ActiveDirectory
     {
 
-        public BindableCollection<Computer> FindMatchingComputers(string filterName)
+        public BindableCollection<IComputer> FindMatchingComputers(string filterName)
         {
             if (!filterName.EndsWith("*") && !filterName.EndsWith("$"))
             {
                 filterName = filterName += "$";
             }
             string filter = string.Format("(&(objectCategory=Computer)(sAMAccountName={0}))", filterName);
-            BindableCollection<Computer> Matches = new BindableCollection<Computer>();
+            BindableCollection<IComputer> Matches = new BindableCollection<IComputer>();
 
             DirectoryEntry de = new DirectoryEntry(string.Format("LDAP://{0}",GetClosestDC()));
             DirectorySearcher ds = new DirectorySearcher(de);

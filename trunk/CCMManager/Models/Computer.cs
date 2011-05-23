@@ -1,40 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace CCMManager.Models
+﻿namespace CCMManager.Models
 {
+    using System;
+    using System.Collections.Generic;
+
     [Serializable]
-    public class Computer
+    public class Computer : IComputer
     {
+        #region Properties
+
         public string Name { get; set; }
-        public string MACAddress { get; set; }
-        public ComputerStates State { get; set; }
-        public Classroom Parent { get; set; }
+        public IList<string> MacAddresses { get; set; }
+        public IClassroom Parent { get; set; }
+
+        #endregion //Properties
+
+        #region Constructors
 
         public Computer()
         {
 
         }
 
-        public Computer(string name)
-        {
-            this.Name = name;
-        }
-
-        public Computer(string name, Classroom parent)
+        public Computer(string name, IClassroom parent = null)
         {
             this.Name = name;
             this.Parent = parent;
+            this.MacAddresses = new List<string>();
         }
 
-        public Computer(string name, Classroom parent, string macAddress, ComputerStates state = ComputerStates.Unknown)
-        {
-            this.Name = name;
-            this.Parent = parent;
-            this.MACAddress = macAddress;
-            this.State = state;
-        }
+        #endregion //Constructors
+
+
+        
     }
 }

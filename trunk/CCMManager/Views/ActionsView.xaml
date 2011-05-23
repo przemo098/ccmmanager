@@ -69,8 +69,6 @@
                     <StackPanel Orientation="Horizontal" Background="Transparent">
                         <TextBlock Text="{Binding DisplayName}" 
                                    Background="Transparent" />
-                        <Button Content="X"
-                                Background="Transparent"/>
                     </StackPanel>
                 </DataTemplate>
             </TabControl.ItemTemplate>

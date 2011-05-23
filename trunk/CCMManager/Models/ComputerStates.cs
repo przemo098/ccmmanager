@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace CCMManager.Models
+﻿namespace CCMManager.Models
 {
+    using System;
+
     [Serializable]
-    [Flags]
     public enum ComputerStates
     {
-        Online,
-        Offline,
-        LoggedOn,
-        Unknown,
-        AccessDenied
+        Online, Offline, LoggedOn, Unknown, DNSError, AccessDenied, Broken
     }
 }
