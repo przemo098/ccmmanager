@@ -47,6 +47,8 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Management.Instrumentation" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\System.Windows.Interactivity.dll</HintPath>
@@ -75,15 +77,35 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\ActionHomeModel.cs" />
+    <Compile Include="Models\ActionsHomeModel.cs" />
+    <Compile Include="Models\Actions\DCMScanAction.cs" />
+    <Compile Include="Models\Actions\GPUpdateAction.cs" />
+    <Compile Include="Models\Actions\LockAction.cs" />
+    <Compile Include="Models\Actions\LogoffAction.cs" />
+    <Compile Include="Models\Actions\PolicyApplyAction.cs" />
+    <Compile Include="Models\Actions\PolicyDownloadAction.cs" />
+    <Compile Include="Models\Actions\PolicyResetAction.cs" />
+    <Compile Include="Models\Actions\RebootAction.cs" />
+    <Compile Include="Models\Actions\ShutdownAction.cs" />
+    <Compile Include="Models\Actions\StatusAction.cs" />
+    <Compile Include="Models\Actions\WakeOnLanAction.cs" />
     <Compile Include="Models\Classroom.cs" />
+    <Compile Include="Models\ClassroomActions.cs" />
     <Compile Include="Models\Computer.cs" />
     <Compile Include="Models\ComputerStates.cs" />
+    <Compile Include="Models\IClassroom.cs" />
+    <Compile Include="Models\IComputer.cs" />
+    <Compile Include="Models\RemoteAction.cs" />
+    <Compile Include="Models\RemoteActionState.cs" />
+    <Compile Include="Models\RemoteStatusAction.cs" />
     <Compile Include="Resources\AddClassroomDialog.xaml.cs">
       <DependentUpon>AddClassroomDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\ActionThreadManager.cs" />
     <Compile Include="Services\ActiveDirectory.cs" />
     <Compile Include="Services\ClassroomRepository.cs" />
+    <Compile Include="Services\StatusPoller.cs" />
+    <Compile Include="Services\WMIProvider.cs" />
     <Compile Include="ViewModels\ActionsComputerViewModel.cs" />
     <Compile Include="ViewModels\ActionsHomeViewModel.cs" />
     <Compile Include="ViewModels\ActionsViewModel.cs" />
@@ -122,6 +144,18 @@
     <Resource Include="Resources\Images\folder_add.png" />
     <Resource Include="Resources\Images\folder_edit.png" />
     <Resource Include="Resources\Images\Info.png" />
+    <Resource Include="Images\identity.png" />
+    <Resource Include="Images\network-error.png" />
+    <Resource Include="Images\network-idle.png" />
+    <Resource Include="Images\network-offline.png" />
+    <Resource Include="Images\network-wired-3.png" />
+    <Resource Include="Images\object-locked.png" />
+    <Resource Include="Images\system-help-3.png" />
+    <Resource Include="Images\system-shutdown-3.png" />
+    <Resource Include="Images\system-shutdown-3-error.png" />
+    <Resource Include="Images\system-shutdown-3-inprogress.png" />
+    <Resource Include="Images\quickopen.png" />
+    <Resource Include="Images\media-playlist-shuffle-3.png" />
     <Content Include="System.Windows.Interactivity.dll" />
   </ItemGroup>
   <ItemGroup>

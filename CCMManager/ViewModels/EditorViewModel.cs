@@ -32,7 +32,7 @@ namespace CCMManager.ViewModels
         {
             _repository = repository;
             _adFunctions = adFunctions;
-            Classrooms = new BindableCollection<Classroom>(_repository.GetClassrooms());
+            Classrooms = new BindableCollection<IClassroom>(_repository.GetClassrooms());
             _worker.DoWork += new DoWorkEventHandler(_worker_DoWork);
             _worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_worker_RunWorkerCompleted);
 
@@ -40,7 +40,7 @@ namespace CCMManager.ViewModels
 
         void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            BindableCollection<Computer> results = (BindableCollection<Computer>)e.Result;
+            BindableCollection<IComputer> results = (BindableCollection<IComputer>)e.Result;
             if (results.Count > 0)
             {
                 foreach (Computer c in results)
@@ -67,8 +67,8 @@ namespace CCMManager.ViewModels
 
         #region Properties & BackingFields
 
-        private BindableCollection<Classroom> _classrooms;
-        public BindableCollection<Classroom> Classrooms
+        private BindableCollection<IClassroom> _classrooms;
+        public BindableCollection<IClassroom> Classrooms
         {
             get { return _classrooms; }
             set
@@ -91,7 +91,7 @@ namespace CCMManager.ViewModels
         }
 
         //private BindableCollection<Computer> _comptuers;
-        public BindableCollection<Computer> Computers
+        public BindableCollection<IComputer> Computers
         {
             get 
             {
@@ -107,8 +107,8 @@ namespace CCMManager.ViewModels
             }
         }
 
-        private Computer _selectedComputer;
-        public Computer SelectedComputer
+        private IComputer _selectedComputer;
+        public IComputer SelectedComputer
         {
             get { return _selectedComputer; }
             set

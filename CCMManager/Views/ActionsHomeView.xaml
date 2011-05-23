@@ -28,33 +28,38 @@
                           Margin="2,15,2,0"
                           Padding="2">
                 <Expander.Header>
-                    <TextBlock Text="Classroom Actions"
-                                   FontSize="12"
-                                   FontWeight="Bold"/>
+                    <TextBlock FontSize="12"
+                               FontWeight="Bold">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding SelectedClassroom.Name}" />
+                            <TextBlock Text=" Actions" />
+                        </StackPanel>
+                        
+                    </TextBlock>
                 </Expander.Header>
 
                 <StackPanel>
                     <ItemsControl Margin="10,4,4,4">
                         <StackPanel>
-                            <Button Content="SCCM Policy Download"
+                            <Button Content="SCCM Policy Download" x:Name="PolicyDownloadClassroom"
                                     Style="{StaticResource LinkButton}" />
-                            <Button Content="SCCM Policy Download"
+                            <Button Content="SCCM Policy Apply" x:Name="PolicyApplyClassroom"
                                     Style="{StaticResource LinkButton}"/>
-                            <Button Content="SCCM Policy Reset"
+                            <Button Content="SCCM Policy Reset" x:Name="PolicyResetClassroom"
                                     Style="{StaticResource LinkButton}"/>
-                            <Button Content="SCCM DCM Scan"
+                            <Button Content="SCCM DCM Scan" x:Name="DCMScanClassroom"
                                         Style="{StaticResource LinkButton}"/>
-                            <Button Content="Reboot"
+                            <Button Content="Reboot" x:Name="RebootClassroom"
                                         Style="{StaticResource LinkButton}"/>
-                            <Button Content="Shutdown"
+                            <Button Content="Shutdown" x:Name="ShutdownClassroom"
                                         Style="{StaticResource LinkButton}"/>
-                            <Button Content="Force Log Off"
+                            <Button Content="Force Log Off" x:Name="LogoffClassroom"
                                         Style="{StaticResource LinkButton}"/>
-                            <Button Content="Reboot"
+                            <Button Content="Lock Screen" x:Name="LockScreenClassroom"
                                         Style="{StaticResource LinkButton}"/>
-                            <Button Content="GPUpdate Force"
+                            <Button Content="GPUpdate Force" x:Name="GPUpdateClassroom"
                                         Style="{StaticResource LinkButton}"/>
-                            <Button Content="Send WOL"
+                            <Button Content="Send WOL" x:Name="WakeClassroom"
                                         Style="{StaticResource LinkButton}"/>
                         </StackPanel>
                     </ItemsControl>
@@ -68,34 +73,46 @@
                           BorderBrush="Gray"
                           Margin="1,15,1,0"
                           Padding="2">
+                <Expander.Style>
+                    <Style TargetType="Expander">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedComputer}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Expander.Style>
                 <Expander.Header>
-                    <TextBlock Text="Selected Client Actions"
-                                   FontSize="12"
-                                   FontWeight="Bold"/>
+                    <TextBlock FontSize="12"
+                               FontWeight="Bold">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock>
+
+                            </TextBlock>
+                        </StackPanel>
+                    </TextBlock>
                 </Expander.Header>
                 <ItemsControl Margin="10,4,4,4">
                     <StackPanel>
-                        <Button Content="SCCM Policy Download"
+                        <Button Content="SCCM Policy Download" x:Name="PolicyDownloadSelected"
                                     Style="{StaticResource LinkButton}" />
-                        <Button Content="SCCM Policy Download"
+                        <Button Content="SCCM Policy Download" x:Name="PolicyApplySelected"
                                     Style="{StaticResource LinkButton}"/>
-                        <Button Content="SCCM Policy Reset"
+                        <Button Content="SCCM Policy Reset" x:Name="PolicyResetSelected"
                                     Style="{StaticResource LinkButton}"/>
-                        <Button Content="SCCM DCM Scan"
+                        <Button Content="SCCM DCM Scan" x:Name="DCMScanSelected"
                                         Style="{StaticResource LinkButton}"/>
-                        <Button Content="Reboot"
+                        <Button Content="Reboot" x:Name="RebootSelected"
                                         Style="{StaticResource LinkButton}"/>
-                        <Button Content="Shutdown"
+                        <Button Content="Shutdown" x:Name="ShutdownSelected"
                                         Style="{StaticResource LinkButton}"/>
-                        <Button Content="Force Log Off"
+                        <Button Content="Force Log Off" x:Name="LogOffSelected"
                                         Style="{StaticResource LinkButton}"/>
-                        <Button Content="Reboot"
+                        <Button Content="Lock Screen" x:Name="LockSelected"
                                         Style="{StaticResource LinkButton}"/>
-                        <Button Content="GPUpdate Force"
+                        <Button Content="GPUpdate Force" x:Name="GPUpdateSelected"
                                         Style="{StaticResource LinkButton}"/>
-                        <Button Content="Send WOL"
-                                        Style="{StaticResource LinkButton}"/>
-                        <Button Content="View Details..."
+                        <Button Content="Send WOL" x:Name="WakeSelected"
                                         Style="{StaticResource LinkButton}"/>
                     </StackPanel>
                 </ItemsControl>
@@ -113,8 +130,7 @@
                             Width="Auto"
                             Background="Transparent"
                             Margin="5,4,0,4"
-                            ToolTip="Edit Classrooms."
-                    >
+                            ToolTip="Edit Classrooms.">
                 <Button.Content>
                     <Image Source="/Resources/Images/folder_edit.png"
                            Width="16" Height="16"/>
@@ -130,9 +146,47 @@
                   cm:Message.Attach="[Event MouseDoubleClick] = [Action ViewComputer($dataContext)]">
             <ListView.View>
                 <GridView>
+                    <GridViewColumn Width="50" Header="Status">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image x:Name="StatusImage"
+                                       ToolTip="{Binding Status}" 
+                                       Source="{Binding CurrentStatusImage}"
+                                       Width="16"/>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Status}" Value="LoggedOn">
+                                        <Setter TargetName="StatusImage" Property="ToolTip" Value="{Binding LoggedOnUser}" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Width="100" Header="Name" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Width="100" Header="Status" />
-                    <GridViewColumn Width="Auto" Header="ActionStatus" />
+                    <GridViewColumn Width="Auto" Header="ActionStatus">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                <ItemsControl ItemsSource="{Binding Actions}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                <Image x:Name="ActionStatus"
+                                                       Source="{Binding CurrentActionImage}"
+                                                       ToolTip="{Binding State}"
+                                                       Width="16" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

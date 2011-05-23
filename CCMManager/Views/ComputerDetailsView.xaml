@@ -33,6 +33,7 @@
                          IsReadOnly="True"
                          Width="80"
                          Margin="2,2,2,2"/>
+                <Button x:Name="Close" Content="Close" />
             </StackPanel>
             
         </Grid>

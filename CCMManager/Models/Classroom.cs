@@ -1,31 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.ObjectModel;
-
-using Caliburn.Micro;
-
-
-namespace CCMManager.Models
+﻿namespace CCMManager.Models
 {
+    using System;
+    using Caliburn.Micro;
+
     [Serializable]
-    public class Classroom
+    public class Classroom : IClassroom
     {
+        #region Properties and Backing Fields
 
-        public Classroom()
-        {
-            Computers = new BindableCollection<Computer>();
-        }
+        public string Name { get; set; }
 
-        public BindableCollection<Computer> Computers
+        public BindableCollection<IComputer> Computers
         {
             get;
             set;
         }
 
-        public string Name { get; set; }
+        #endregion //Properties and Backing Fields
 
-        
+        #region Constructors
+
+        public Classroom()
+        {
+            Computers = new BindableCollection<IComputer>();
+        }
+
+        public Classroom(string name, BindableCollection<IComputer> computers = null)
+        {
+            this.Computers = new BindableCollection<IComputer>();
+            this.Name = name;
+
+        }
+
+        #endregion
     }
 }

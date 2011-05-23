@@ -11,7 +11,7 @@
     public class ClassroomRepository
     {
         private readonly string _stateFile;
-        private BindableCollection<Classroom> _classroomStore;
+        private BindableCollection<IClassroom> _classroomStore;
 
         [ImportingConstructor]
         public ClassroomRepository()
@@ -22,12 +22,12 @@
         }
 
         
-        public BindableCollection<Classroom> GetClassrooms()
+        public BindableCollection<IClassroom> GetClassrooms()
         {
-            return new BindableCollection<Classroom>(this._classroomStore);
+            return new BindableCollection<IClassroom>(this._classroomStore);
         }
 
-        public void SetClassrooms(BindableCollection<Classroom> classrooms)
+        public void SetClassrooms(BindableCollection<IClassroom> classrooms)
         {
             this._classroomStore = classrooms;
             this.Serialize();
@@ -69,12 +69,12 @@
                 using (FileStream stream = File.Open(this._stateFile, FileMode.Open))
                 {
                     BinaryFormatter formatter = new BinaryFormatter();
-                    this._classroomStore = (BindableCollection<Classroom>)formatter.Deserialize(stream);
+                    this._classroomStore = (BindableCollection<IClassroom>)formatter.Deserialize(stream);
                 }
             }
             else
             {
-                this._classroomStore = new BindableCollection<Classroom>();
+                this._classroomStore = new BindableCollection<IClassroom>();
             }
         }
 

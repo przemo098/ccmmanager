@@ -29,5 +29,11 @@ namespace CCMManager.ViewModels
         {
             get { return GetType().Name; }
         }
+
+        public void Close()
+        {
+            Console.WriteLine("Closing");
+            base.TryClose();
+        }
     }
 }
