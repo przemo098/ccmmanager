@@ -27,6 +27,15 @@
                           BorderBrush="Gray"
                           Margin="2,15,2,0"
                           Padding="2">
+                <Expander.Style>
+                    <Style TargetType="Expander">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=Classrooms, Path=Items.Count}" Value="0">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Expander.Style>
                 <Expander.Header>
                     <TextBlock FontSize="12"
                                FontWeight="Bold">
@@ -41,11 +50,15 @@
                 <StackPanel>
                     <ItemsControl Margin="10,4,4,4">
                         <StackPanel>
+                            <Button Content="SCCM DDR Cycle" x:Name="DDRScanClassroom"
+                                    Style="{StaticResource LinkButton}"/>
                             <Button Content="SCCM Policy Download" x:Name="PolicyDownloadClassroom"
                                     Style="{StaticResource LinkButton}" />
                             <Button Content="SCCM Policy Apply" x:Name="PolicyApplyClassroom"
                                     Style="{StaticResource LinkButton}"/>
                             <Button Content="SCCM Policy Reset" x:Name="PolicyResetClassroom"
+                                    Style="{StaticResource LinkButton}"/>
+                            <Button Content="SCCM Policy Hard Reset" x:Name="PolicyHardResetClassroom"
                                     Style="{StaticResource LinkButton}"/>
                             <Button Content="SCCM DCM Scan" x:Name="DCMScanClassroom"
                                         Style="{StaticResource LinkButton}"/>
@@ -56,7 +69,8 @@
                             <Button Content="Force Log Off" x:Name="LogoffClassroom"
                                         Style="{StaticResource LinkButton}"/>
                             <Button Content="Lock Screen" x:Name="LockScreenClassroom"
-                                        Style="{StaticResource LinkButton}"/>
+                                        Style="{StaticResource LinkButton}"
+                                    Visibility="Collapsed"/>
                             <Button Content="GPUpdate Force" x:Name="GPUpdateClassroom"
                                         Style="{StaticResource LinkButton}"/>
                             <Button Content="Send WOL" x:Name="WakeClassroom"
@@ -76,7 +90,7 @@
                 <Expander.Style>
                     <Style TargetType="Expander">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding SelectedComputer}">
+                            <DataTrigger Binding="{Binding ElementName=SelectedPC, Path=Text.Length}" Value="0">
                                 <Setter Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
                         </Style.Triggers>
@@ -86,19 +100,22 @@
                     <TextBlock FontSize="12"
                                FontWeight="Bold">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock>
-
-                            </TextBlock>
+                            <TextBlock Text="{Binding SelectedComputer.Name}" x:Name="SelectedPC" />
+                            <TextBlock Text=" Actions" />
                         </StackPanel>
                     </TextBlock>
                 </Expander.Header>
                 <ItemsControl Margin="10,4,4,4">
                     <StackPanel>
+                        <Button Content="SCCM DDR Cycle" x:Name="DDRScanSelected"
+                                    Style="{StaticResource LinkButton}"/>
                         <Button Content="SCCM Policy Download" x:Name="PolicyDownloadSelected"
                                     Style="{StaticResource LinkButton}" />
-                        <Button Content="SCCM Policy Download" x:Name="PolicyApplySelected"
+                        <Button Content="SCCM Policy Apply" x:Name="PolicyApplySelected"
                                     Style="{StaticResource LinkButton}"/>
                         <Button Content="SCCM Policy Reset" x:Name="PolicyResetSelected"
+                                    Style="{StaticResource LinkButton}"/>
+                        <Button Content="SCCM Policy Hard Reset" x:Name="PolicyHardResetSelected"
                                     Style="{StaticResource LinkButton}"/>
                         <Button Content="SCCM DCM Scan" x:Name="DCMScanSelected"
                                         Style="{StaticResource LinkButton}"/>
@@ -109,7 +126,8 @@
                         <Button Content="Force Log Off" x:Name="LogOffSelected"
                                         Style="{StaticResource LinkButton}"/>
                         <Button Content="Lock Screen" x:Name="LockSelected"
-                                        Style="{StaticResource LinkButton}"/>
+                                        Style="{StaticResource LinkButton}"
+                                Visibility="Collapsed"/>
                         <Button Content="GPUpdate Force" x:Name="GPUpdateSelected"
                                         Style="{StaticResource LinkButton}"/>
                         <Button Content="Send WOL" x:Name="WakeSelected"
@@ -143,7 +161,8 @@
                   Margin="4,2,4,4"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   Height="419"
-                  cm:Message.Attach="[Event MouseDoubleClick] = [Action ViewComputer($dataContext)]">
+                  SelectionMode="Single">
+            <!--cm:Message.Attach="[Event MouseDoubleClick] = [Action ViewComputer($dataContext)]"-->
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="50" Header="Status">
@@ -162,7 +181,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Width="100" Header="Name" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Width="Auto" Header="ActionStatus">
+                    <GridViewColumn Width="200" Header="ActionStatus">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
