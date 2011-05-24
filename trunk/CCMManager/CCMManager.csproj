@@ -78,12 +78,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\ActionsHomeModel.cs" />
+    <Compile Include="Models\Actions\DataDiscoveryAction.cs" />
     <Compile Include="Models\Actions\DCMScanAction.cs" />
     <Compile Include="Models\Actions\GPUpdateAction.cs" />
     <Compile Include="Models\Actions\LockAction.cs" />
     <Compile Include="Models\Actions\LogoffAction.cs" />
     <Compile Include="Models\Actions\PolicyApplyAction.cs" />
     <Compile Include="Models\Actions\PolicyDownloadAction.cs" />
+    <Compile Include="Models\Actions\PolicyHardResetAction.cs" />
     <Compile Include="Models\Actions\PolicyResetAction.cs" />
     <Compile Include="Models\Actions\RebootAction.cs" />
     <Compile Include="Models\Actions\ShutdownAction.cs" />

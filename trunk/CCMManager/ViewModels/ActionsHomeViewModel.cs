@@ -20,10 +20,13 @@
     [Export(typeof(IChildScreen<ActionsViewModel>))]
     public class ActionsHomeViewModel : Screen, IChildScreen<ActionsViewModel>
     {
+        #region Internal
+
         private ClassroomRepository _repository;
-        //private BackgroundWorker _worker = new BackgroundWorker();
-        //private StatusPollerManager _statusPoller = new StatusPollerManager();
         ActionThreadManager _actionManager = new ActionThreadManager();
+        #endregion //Internal 
+
+        #region Constructors
 
         [ImportingConstructor]
         public ActionsHomeViewModel(ClassroomRepository repository)
@@ -31,11 +34,10 @@
             DisplayName = "Actions";
             _repository = repository;
             Task.Factory.StartNew(() => { _actionManager.ActionProcessor(); });
-            
-            //_worker.DoWork += new DoWorkEventHandler(_worker_DoWork);
-            //_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(_worker_RunWorkerCompleted);
-            
+                        
         }
+
+        #endregion
 
         #region Properties & BackingFields
 
@@ -116,6 +118,7 @@
 
         #endregion //Properties and BackingFields
 
+        #region Methods
 
         public void EditClassrooms(object o)
         {
@@ -166,24 +169,6 @@
             base.OnActivate();
         }
 
-        //void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        //{
-            
-        //}
-
-        //void _worker_DoWork(object sender, DoWorkEventArgs e)
-        //{
-            
-            
-        //}
-
-        //private void m_Done(object sender, EventArgs e)
-        //{
-        //    //var act = new Action<object>(delegate() { NotifyOfPropertyChange(()=> Computers; }));
-        //    //App.Current.Dispatcher.BeginInvoke(new System.Action(delegate() { NotifyOfPropertyChange(() => Computers); } ));
-        //    //this.Dispatcher.BeginInvoke(new Action(delegate() { NotifyOfPropertyChange(() => Computers); }));
-        //}
-
         private void StartStatusPoller()
         {
             //foreach (ActionsHomeModel c in SelectedClassroom.Computers)
@@ -222,6 +207,8 @@
         {
             //_statusPoller.Stop();
         }
+
+        #endregion //Methods
 
         #region Public Menu Actions
 
@@ -295,7 +282,7 @@
                 AddPolicyApplyAction(SelectedComputer, action);
             }
         }
-        public void PolicyResetClassroom(object sender)
+        public void PolicyHardResetClassroom(object sender)
         {
             Dictionary<RemoteActionState, ImageSource> pics = new Dictionary<RemoteActionState, ImageSource>();
             var imgDefault = new BitmapImage(new Uri("pack://application:,,,/Images/media-playlist-shuffle-3.png"));
@@ -307,6 +294,41 @@
             pics.Add(RemoteActionState.ReRun, imgDefault as ImageSource);
             pics.Add(RemoteActionState.ReRunning, imgDefault as ImageSource);
             
+            foreach (ActionsHomeModel pc in SelectedClassroom.Computers)
+            {
+                PolicyHardResetAction action = new PolicyHardResetAction(pics);
+                AddPolicyHardResetAction(pc, action);
+            }
+        }
+        public void PolicyHardResetSelected(object sender)
+        {
+            Dictionary<RemoteActionState, ImageSource> pics = new Dictionary<RemoteActionState, ImageSource>();
+            var imgDefault = new BitmapImage(new Uri("pack://application:,,,/Images/media-playlist-shuffle-3.png"));
+            pics.Add(RemoteActionState.NotStarted, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.Completed, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.Error, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.InProgress, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.Pending, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.ReRun, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.ReRunning, imgDefault as ImageSource);
+            PolicyHardResetAction action = new PolicyHardResetAction(pics);
+            if (SelectedComputer != null)
+            {
+                AddPolicyHardResetAction(SelectedComputer, action);
+            }
+        }
+        public void PolicyResetClassroom(object sender)
+        {
+            Dictionary<RemoteActionState, ImageSource> pics = new Dictionary<RemoteActionState, ImageSource>();
+            var imgDefault = new BitmapImage(new Uri("pack://application:,,,/Images/media-playlist-shuffle-3.png"));
+            pics.Add(RemoteActionState.NotStarted, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.Completed, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.Error, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.InProgress, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.Pending, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.ReRun, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.ReRunning, imgDefault as ImageSource);
+
             foreach (ActionsHomeModel pc in SelectedClassroom.Computers)
             {
                 PolicyResetAction action = new PolicyResetAction(pics);
@@ -365,6 +387,41 @@
                 AddDCMScanAction(SelectedComputer, action);
             }
         }
+        public void DDRScanClassroom(object sender)
+        {
+            Dictionary<RemoteActionState, ImageSource> pics = new Dictionary<RemoteActionState, ImageSource>();
+            var imgDefault = new BitmapImage(new Uri("pack://application:,,,/Images/media-playlist-shuffle-3.png"));
+            pics.Add(RemoteActionState.NotStarted, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.Completed, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.Error, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.InProgress, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.Pending, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.ReRun, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.ReRunning, imgDefault as ImageSource);
+
+            foreach (ActionsHomeModel pc in SelectedClassroom.Computers)
+            {
+                DataDiscoveryAction action = new DataDiscoveryAction(pics);
+                AddDDRAction(pc, action);
+            }
+        }
+        public void DDRScanSelected(object sender)
+        {
+            Dictionary<RemoteActionState, ImageSource> pics = new Dictionary<RemoteActionState, ImageSource>();
+            var imgDefault = new BitmapImage(new Uri("pack://application:,,,/Images/media-playlist-shuffle-3.png"));
+            pics.Add(RemoteActionState.NotStarted, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.Completed, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.Error, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.InProgress, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.Pending, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.ReRun, imgDefault as ImageSource);
+            pics.Add(RemoteActionState.ReRunning, imgDefault as ImageSource);
+            DataDiscoveryAction action = new DataDiscoveryAction(pics);
+            if (SelectedComputer != null)
+            {
+                AddDDRAction(SelectedComputer, action);
+            }
+        }
         public void RebootClassroom(object sender)
         {
             Dictionary<RemoteActionState, ImageSource> pics = new Dictionary<RemoteActionState, ImageSource>();
@@ -376,10 +433,12 @@
             pics.Add(RemoteActionState.Pending, imgDefault as ImageSource);
             pics.Add(RemoteActionState.ReRun, imgDefault as ImageSource);
             pics.Add(RemoteActionState.ReRunning, imgDefault as ImageSource);
-            RebootAction action = new RebootAction(pics);
+            
             foreach (ActionsHomeModel pc in SelectedClassroom.Computers)
             {
-                AddRebootAction(pc, action);
+                RebootAction action = new RebootAction(pics);
+                ActionsHomeModel i = pc;
+                AddRebootAction(i, action);
             }
         }
         public void RebootSelected(object sender)
@@ -661,6 +720,30 @@
                 _actionManager.AddAction(pc);
             }
         }
+        private void AddPolicyHardResetAction(ActionsHomeModel pc, PolicyHardResetAction polReset)
+        {
+            bool pcHasAction = false;
+            foreach (RemoteAction ra in pc.Actions)
+            {
+                if (ra.GetType() == typeof(PolicyHardResetAction))
+                {
+                    //Already contains this one.
+                    pcHasAction = true;
+                    //re-run it if completed/error
+                    if (ra.State == RemoteActionState.Completed || ra.State == RemoteActionState.Error)
+                    {
+                        ra.State = RemoteActionState.ReRun;
+                        _actionManager.AddAction(pc);
+                    }
+                }
+            }
+
+            if (!pcHasAction)
+            {
+                pc.Actions.Add(polReset);
+                _actionManager.AddAction(pc);
+            }
+        }
         private void AddDCMScanAction(ActionsHomeModel pc, DCMScanAction dcmScan)
         {
             bool pcHasAction = false;
@@ -757,7 +840,7 @@
                 _actionManager.AddAction(pc);
             }
         }
-        private void AddGPUpdateAction(ActionsHomeModel pc,GPUpdateAction gpu) 
+        private void AddGPUpdateAction(ActionsHomeModel pc, GPUpdateAction gpu) 
         {
             bool pcHasAction = false;
             foreach (RemoteAction ra in pc.Actions)
@@ -778,6 +861,30 @@
             if (!pcHasAction)
             {
                 pc.Actions.Add(gpu);
+                _actionManager.AddAction(pc);
+            }
+        }
+        private void AddDDRAction(ActionsHomeModel pc, DataDiscoveryAction ddr)
+        {
+            bool pcHasAction = false;
+            foreach (RemoteAction ra in pc.Actions)
+            {
+                if (ra.GetType() == typeof(DataDiscoveryAction))
+                {
+                    //Already contains this one.
+                    pcHasAction = true;
+                    //re-run it if completed/error
+                    if (ra.State == RemoteActionState.Completed || ra.State == RemoteActionState.Error)
+                    {
+                        ra.State = RemoteActionState.ReRun;
+                        _actionManager.AddAction(pc);
+                    }
+                }
+            }
+
+            if (!pcHasAction)
+            {
+                pc.Actions.Add(ddr);
                 _actionManager.AddAction(pc);
             }
         }
