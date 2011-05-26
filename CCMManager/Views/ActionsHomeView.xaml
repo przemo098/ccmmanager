@@ -50,31 +50,43 @@
                 <StackPanel>
                     <ItemsControl Margin="10,4,4,4">
                         <StackPanel>
-                            <Button Content="SCCM DDR Cycle" x:Name="DDRScanClassroom"
-                                    Style="{StaticResource LinkButton}"/>
-                            <Button Content="SCCM Policy Download" x:Name="PolicyDownloadClassroom"
+                            <Button Content="SCCM Data Discovery Cycle" 
+                                    x:Name="DDRScanClassroom"
                                     Style="{StaticResource LinkButton}" />
-                            <Button Content="SCCM Policy Apply" x:Name="PolicyApplyClassroom"
+                            <Button Content="SCCM Policy Retrieval" 
+                                    x:Name="PolicyDownloadClassroom"
+                                    Style="{StaticResource LinkButton}" />
+                            <Button Content="SCCM Policy Evaluation" 
+                                    x:Name="PolicyApplyClassroom"
                                     Style="{StaticResource LinkButton}"/>
-                            <Button Content="SCCM Policy Reset" x:Name="PolicyResetClassroom"
+                            <Button Content="SCCM Policy Reset" 
+                                    x:Name="PolicyResetClassroom"
                                     Style="{StaticResource LinkButton}"/>
-                            <Button Content="SCCM Policy Hard Reset" x:Name="PolicyHardResetClassroom"
+                            <Button Content="SCCM Policy Hard Reset" 
+                                    x:Name="PolicyHardResetClassroom"
                                     Style="{StaticResource LinkButton}"/>
-                            <Button Content="SCCM DCM Scan" x:Name="DCMScanClassroom"
-                                        Style="{StaticResource LinkButton}"/>
-                            <Button Content="Reboot" x:Name="RebootClassroom"
-                                        Style="{StaticResource LinkButton}"/>
-                            <Button Content="Shutdown" x:Name="ShutdownClassroom"
-                                        Style="{StaticResource LinkButton}"/>
-                            <Button Content="Force Log Off" x:Name="LogoffClassroom"
-                                        Style="{StaticResource LinkButton}"/>
-                            <Button Content="Lock Screen" x:Name="LockScreenClassroom"
-                                        Style="{StaticResource LinkButton}"
+                            <Button Content="SCCM DCM Scan" 
+                                    x:Name="DCMScanClassroom"
+                                    Style="{StaticResource LinkButton}"/>
+                            <Button Content="Reboot" 
+                                    x:Name="RebootClassroom"
+                                    Style="{StaticResource LinkButton}"/>
+                            <Button Content="Shutdown"
+                                    x:Name="ShutdownClassroom"
+                                    Style="{StaticResource LinkButton}"/>
+                            <Button Content="Force Log Off" 
+                                    x:Name="LogoffClassroom"
+                                    Style="{StaticResource LinkButton}"/>
+                            <Button Content="Lock Screen"
+                                    x:Name="LockScreenClassroom"
+                                    Style="{StaticResource LinkButton}"
                                     Visibility="Collapsed"/>
-                            <Button Content="GPUpdate Force" x:Name="GPUpdateClassroom"
-                                        Style="{StaticResource LinkButton}"/>
-                            <Button Content="Send WOL" x:Name="WakeClassroom"
-                                        Style="{StaticResource LinkButton}"/>
+                            <Button Content="GPUpdate Force"
+                                    x:Name="GPUpdateClassroom"
+                                    Style="{StaticResource LinkButton}"/>
+                            <Button Content="Send WOL"
+                                    x:Name="WakeClassroom"
+                                    Style="{StaticResource LinkButton}"/>
                         </StackPanel>
                     </ItemsControl>
                 </StackPanel>
@@ -107,31 +119,43 @@
                 </Expander.Header>
                 <ItemsControl Margin="10,4,4,4">
                     <StackPanel>
-                        <Button Content="SCCM DDR Cycle" x:Name="DDRScanSelected"
-                                    Style="{StaticResource LinkButton}"/>
-                        <Button Content="SCCM Policy Download" x:Name="PolicyDownloadSelected"
-                                    Style="{StaticResource LinkButton}" />
-                        <Button Content="SCCM Policy Apply" x:Name="PolicyApplySelected"
-                                    Style="{StaticResource LinkButton}"/>
-                        <Button Content="SCCM Policy Reset" x:Name="PolicyResetSelected"
-                                    Style="{StaticResource LinkButton}"/>
-                        <Button Content="SCCM Policy Hard Reset" x:Name="PolicyHardResetSelected"
-                                    Style="{StaticResource LinkButton}"/>
-                        <Button Content="SCCM DCM Scan" x:Name="DCMScanSelected"
-                                        Style="{StaticResource LinkButton}"/>
-                        <Button Content="Reboot" x:Name="RebootSelected"
-                                        Style="{StaticResource LinkButton}"/>
-                        <Button Content="Shutdown" x:Name="ShutdownSelected"
-                                        Style="{StaticResource LinkButton}"/>
-                        <Button Content="Force Log Off" x:Name="LogOffSelected"
-                                        Style="{StaticResource LinkButton}"/>
-                        <Button Content="Lock Screen" x:Name="LockSelected"
-                                        Style="{StaticResource LinkButton}"
+                        <Button Content="SCCM Data Discovery Cycle"
+                                x:Name="DDRScanSelected"
+                                Style="{StaticResource LinkButton}"/>
+                        <Button Content="SCCM Policy Retrieval" 
+                                x:Name="PolicyDownloadSelected"
+                                Style="{StaticResource LinkButton}" />
+                        <Button Content="SCCM Policy Evaluation"
+                                x:Name="PolicyApplySelected"
+                                Style="{StaticResource LinkButton}"/>
+                        <Button Content="SCCM Policy Reset" 
+                                x:Name="PolicyResetSelected"
+                                Style="{StaticResource LinkButton}"/>
+                        <Button Content="SCCM Policy Hard Reset" 
+                                x:Name="PolicyHardResetSelected"
+                                Style="{StaticResource LinkButton}"/>
+                        <Button Content="SCCM DCM Scan" 
+                                x:Name="DCMScanSelected"
+                                Style="{StaticResource LinkButton}"/>
+                        <Button Content="Reboot" 
+                                x:Name="RebootSelected"
+                                Style="{StaticResource LinkButton}"/>
+                        <Button Content="Shutdown" 
+                                x:Name="ShutdownSelected"
+                                Style="{StaticResource LinkButton}"/>
+                        <Button Content="Force Log Off"
+                                x:Name="LogOffSelected"
+                                Style="{StaticResource LinkButton}"/>
+                        <Button Content="Lock Screen" 
+                                x:Name="LockSelected"
+                                Style="{StaticResource LinkButton}"
                                 Visibility="Collapsed"/>
-                        <Button Content="GPUpdate Force" x:Name="GPUpdateSelected"
-                                        Style="{StaticResource LinkButton}"/>
-                        <Button Content="Send WOL" x:Name="WakeSelected"
-                                        Style="{StaticResource LinkButton}"/>
+                        <Button Content="GPUpdate Force" 
+                                x:Name="GPUpdateSelected"
+                                Style="{StaticResource LinkButton}"/>
+                        <Button Content="Send WOL" 
+                                x:Name="WakeSelected"
+                                Style="{StaticResource LinkButton}"/>
                     </StackPanel>
                 </ItemsControl>
 
@@ -160,8 +184,9 @@
         <ListView x:Name="Computers"
                   Margin="4,2,4,4"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  Height="419"
-                  SelectionMode="Single">
+                  SelectionMode="Single"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch">
             <!--cm:Message.Attach="[Event MouseDoubleClick] = [Action ViewComputer($dataContext)]"-->
             <ListView.View>
                 <GridView>
@@ -194,10 +219,17 @@
                                             <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
-                                                <Image x:Name="ActionStatus"
+                                                    <Image x:Name="ActionStatus"
                                                        Source="{Binding CurrentActionImage}"
-                                                       ToolTip="{Binding State}"
-                                                       Width="16" />
+                                                       Width="16" >
+                                                        <Image.ToolTip>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="{Binding RemoteActionName}" />
+                                                                <TextBlock Text=" - " />
+                                                                <TextBlock Text="{Binding State}" />
+                                                            </StackPanel>
+                                                        </Image.ToolTip>
+                                                    </Image>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>

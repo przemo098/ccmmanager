@@ -34,13 +34,16 @@
                            Margin="4,4,4,4"/>
                 <ComboBox x:Name="Classrooms"
                           Width="150"
-                          IsEditable="True"
+                          IsEditable="False"
                           Margin="4,4,4,4"
-                          DisplayMemberPath="Name"
-                          />
+                          DisplayMemberPath="Name"/>
                 <Button x:Name="NewRoom"
                         Content="New"
                         Margin="4,4,4,4"/>
+                <Button x:Name="DeleteRoom"
+                        Content="Delete"
+                        Margin="4,4,4,4"
+                        IsEnabled="{Binding ElementName=Classrooms, Path=SelectedItems.Count}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2"
@@ -98,7 +101,8 @@
                                    Margin="4,4,4,4" />
                         <TextBox x:Name="SingleComputerName"
                                  Margin="4,4,4,4"
-                                 Width="150"/>
+                                 Width="150"
+                                 IsEnabled="{Binding ElementName=Classrooms, Path=Items.Count}"/>
                         <Button x:Name="AddSingleComputer"
                                 Margin="4,4,4,4"
                                 IsEnabled="{Binding ElementName=SingleComputerName, Path=Text.Length}"
@@ -116,7 +120,8 @@
                                    Margin="4,4,4,4" />
                         <TextBox x:Name="ADComputerNameFilter"
                                  Margin="4,4,4,4"
-                                 Width="150" />
+                                 Width="150"
+                                 IsEnabled="{Binding ElementName=Classrooms, Path=Items.Count}"/>
                         <Button x:Name="AddADComputers"
                                 Margin="4,4,4,4"
                                 Width="50"

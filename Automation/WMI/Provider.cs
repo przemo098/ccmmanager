@@ -1,12 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//CCMManager
+//Copyright (c) 2008 by Roger Zander
+//Copyright (c) 2011 by David Kamphuis
+//
+//   This file is part of CCMManager.
+//
+//    CCMManager is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+//
+//    Foobar is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+
 using System.Management;
 
-namespace CCMManager.Automation
+namespace CCMManager.Automation.WMI
 {
-    public class WMIProvider
+    public class Provider
     {
         #region Internal
 
@@ -31,7 +46,7 @@ namespace CCMManager.Automation
         /// Connect to a given namespace.
         /// </summary>
         /// <param name="sNamespace">Namespace to be connected to.</param>
-        public WMIProvider(string sNamespace)
+        public Provider(string sNamespace)
         {
             Connect(sNamespace);
         }
@@ -40,7 +55,7 @@ namespace CCMManager.Automation
         /// Connect to a given ManagementScope.
         /// </summary>
         /// <param name="mScope">ManagementScope object to be connected to.</param>
-        public WMIProvider(ManagementScope mScope)
+        public Provider(ManagementScope mScope)
         {
             mScope = mScope.Clone();
         }
@@ -51,7 +66,7 @@ namespace CCMManager.Automation
         /// <param name="sNamespace">Namespace to connect to.</param>
         /// <param name="sUser">Username to be used.</param>
         /// <param name="sPassword">Password for the usernaem.</param>
-        public WMIProvider(string sNamespace, string sUser, string sPassword)
+        public Provider(string sNamespace, string sUser, string sPassword)
         {
             Connect(sNamespace, sUser, sPassword);
         }
@@ -235,6 +250,77 @@ namespace CCMManager.Automation
         }
 
         #endregion //ExecuteMethod
+
+        #region DeleteQueryResults
+
+        /// <summary>
+        /// Delete all instances from a Query Result
+        /// </summary>
+        /// <param name="sQuery"></param>
+        public void DeleteQueryResults(string sQuery)
+        {
+            ManagementObjectCollection oResults = ExecuteQuery(sQuery);
+            foreach (ManagementObject oInst in oResults)
+            {
+                oInst.Delete();
+            }
+        }
+
+        /// <summary>
+        /// Delete all instances from a Query Result
+        /// </summary>
+        /// <param name="sNamespace"></param>
+        /// <param name="sQuery"></param>
+        public void DeleteQueryResults(string sNamespace, string sQuery)
+        {
+            try
+            {
+                WMI.Provider oProv = new WMI.Provider(this.mScope.Clone());
+                oProv.mScope.Path.NamespacePath = sNamespace;
+                ManagementObjectCollection oResults = oProv.ExecuteQuery(sQuery);
+                foreach (ManagementObject oInst in oResults)
+                {
+                    oInst.Delete();
+                }
+            }
+            catch { }
+        }
+
+        #endregion //DeleteQueryResults
+
+        #region ManagementObjectCopy
+
+        /// <summary>
+        /// Copy a ManagementObject to a new Path
+        /// </summary>
+        /// <param name="MO"></param>
+        /// <param name="Scope"></param>
+        /// <param name="Dest"></param>
+        static public void ManagementObjectCopy(ManagementBaseObject MO, ManagementScope Scope, ManagementPath Dest)
+        {
+            if (MO != null)
+            {
+                try
+                {
+                    ManagementObject MORemote = new ManagementObject();
+                    ManagementClass RemoteClas = new ManagementClass(Scope, Dest, new ObjectGetOptions());
+                    MORemote = RemoteClas.CreateInstance();
+
+                    foreach (PropertyData PD in MO.Properties)
+                    {
+                        try
+                        {
+                            MORemote.Properties[PD.Name].Value = PD.Value;
+                        }
+                        catch { }
+                    }
+                    MORemote.Put();
+                }
+                catch { }
+            }
+        }
+
+        #endregion //ManagementObjectCopy
 
         #endregion //Public Methods
     }

@@ -1,20 +1,32 @@
-﻿namespace CCMManager
+﻿//CCMManager
+//Copyright (c) 2011 by David Kamphuis
+//
+//   This file is part of CCMManager.
+//
+//    CCMManager is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+//
+//    Foobar is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+using System.ComponentModel.Composition.Primitives;
+using System.Linq;
+using Caliburn.Micro;
+using CCMManager.Framework;
+
+namespace CCMManager
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.Composition;
-    using System.ComponentModel.Composition.Hosting;
-    using System.ComponentModel.Composition.Primitives;
-    using System.Linq;
-    using System.Windows;
-    using Caliburn.Micro;
-
-    using CCMManager.ViewModels;
-    using CCMManager.Framework;
-    using CCMManager.Services;
-
-
     public class CustomBootstrapper : Bootstrapper<IShell>
     {
         private CompositionContainer container;
@@ -26,13 +38,16 @@
 
         protected override void Configure()
         {
-            
-            container = CompositionHost.Initialize(
-                new AggregateCatalog(
-                AssemblySource.Instance.Select(x => new AssemblyCatalog(x)).OfType<ComposablePartCatalog>()
-                )
-            );
-
+            //Silverlight: uses 
+            //Assembly System.ComponentModel.Composition.Initialization
+            // Located: C:\Program Files (x86)\Microsoft SDKs\Silverlight\v4.0\Libraries\Client\System.ComponentModel.Composition.Initialization.dll
+            //container = CompositionHost.Initialize(
+            //    new AggregateCatalog(
+            //    AssemblySource.Instance.Select(x => new AssemblyCatalog(x)).OfType<ComposablePartCatalog>()
+            //    )
+            //);
+            AggregateCatalog catalog = new AggregateCatalog(AssemblySource.Instance.Select(x => new AssemblyCatalog(x)).OfType<ComposablePartCatalog>());
+            container = new CompositionContainer(catalog);
             var batch = new CompositionBatch();
 
             batch.AddExportedValue<IWindowManager>(new WindowManager());

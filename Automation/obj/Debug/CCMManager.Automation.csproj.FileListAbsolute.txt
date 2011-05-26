@@ -1,0 +1,5 @@
+C:\Data\Projects\C#\CCMManager\Automation\bin\Debug\Automation.dll
+C:\Data\Projects\C#\CCMManager\Automation\bin\Debug\Automation.pdb
+C:\Data\Projects\C#\CCMManager\Automation\obj\Debug\ResolveAssemblyReference.cache
+C:\Data\Projects\C#\CCMManager\Automation\obj\Debug\Automation.dll
+C:\Data\Projects\C#\CCMManager\Automation\obj\Debug\Automation.pdb

@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("CCMManager")]
 [assembly: AssemblyDescription("Manage SCCM Clients Remotely")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("David K")]
+[assembly: AssemblyCompany("David Kamphuis")]
 [assembly: AssemblyProduct("CCMManager")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCopyright("David Kamphuis 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
