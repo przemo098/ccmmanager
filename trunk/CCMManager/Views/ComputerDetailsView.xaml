@@ -5,37 +5,121 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
-            <RowDefinition Height="32" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="32" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="70" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <UserControl.Resources>
+        <Style x:Key="OutlookTabControlStyle" TargetType="{x:Type TabControl}">
+            <Setter Property="Foreground"
+                    Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background"
+                    Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+            <Setter Property="BorderBrush" Value=
+      "{x:Static Microsoft_Windows_Themes:ClassicBorderDecorator.ClassicBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="MinWidth" Value="10"/>
+            <Setter Property="MinHeight" Value="10"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabControl}">
+                        <Grid ClipToBounds="true" SnapsToDevicePixels="true"
+                      KeyboardNavigation.TabNavigation="Local">
+                            <Grid.RowDefinitions>
+                                <RowDefinition x:Name="RowDefinition0" Height="Auto"/>
+                                <RowDefinition x:Name="RowDefinition1" Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="ColumnDefinition0"/>
+                                <ColumnDefinition x:Name="ColumnDefinition1" Width="0"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid x:Name="ContentPanel" Grid.Column="0" Grid.Row="1"
+                        KeyboardNavigation.DirectionalNavigation="Contained"
+                        KeyboardNavigation.TabIndex="2"
+                        KeyboardNavigation.TabNavigation="Local">
+                                <Microsoft_Windows_Themes:ClassicBorderDecorator
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderStyle="Raised"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                                    <ContentPresenter SnapsToDevicePixels=
+                            "{TemplateBinding SnapsToDevicePixels}" Margin="2,2,2,2"
+                            x:Name="PART_SelectedContentHost"
+                            ContentSource="SelectedContent"/>
+                                </Microsoft_Windows_Themes:ClassicBorderDecorator>
+                            </Grid>
+                            <StackPanel HorizontalAlignment="Stretch" Margin="0,-2,0,0"
+                    x:Name="HeaderPanel" VerticalAlignment="Bottom" Width="Auto" 
+                Height="Auto" Grid.Row="1" IsItemsHost="True"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="TabStripPlacement" Value="Bottom">
+                                <Setter Property="Grid.Row"
+                        TargetName="ContentPanel" Value="0"/>
+                                <Setter Property="Height"
+                            TargetName="RowDefinition0" Value="*"/>
+                                <Setter Property="Height"
+                            TargetName="RowDefinition1" Value="Auto"/>
+                            </Trigger>
+                            <Trigger Property="TabStripPlacement" Value="Left">
+                                <Setter Property="Grid.Row"
+                            TargetName="ContentPanel" Value="0"/>
+                                <Setter Property="Grid.Column"
+                            TargetName="ContentPanel" Value="1"/>
+                                <Setter Property="Width"
+                            TargetName="ColumnDefinition0" Value="Auto"/>
+                                <Setter Property="Width"
+                            TargetName="ColumnDefinition1" Value="*"/>
+                                <Setter Property="Height"
+                            TargetName="RowDefinition0" Value="*"/>
+                                <Setter Property="Height"
+                            TargetName="RowDefinition1" Value="0"/>
+                            </Trigger>
+                            <Trigger Property="TabStripPlacement" Value="Right">
+                                <Setter Property="Grid.Row"
+                            TargetName="ContentPanel" Value="0"/>
+                                <Setter Property="Grid.Column"
+                            TargetName="ContentPanel" Value="0"/>
+                                <Setter Property="Width"
+                            TargetName="ColumnDefinition0" Value="*"/>
+                                <Setter Property="Width"
+                            TargetName="ColumnDefinition1" Value="Auto"/>
+                                <Setter Property="Height"
+                            TargetName="RowDefinition0" Value="*"/>
+                                <Setter Property="Height"
+                            TargetName="RowDefinition1" Value="0"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground"
+                            Value="{DynamicResource
+                            {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <DockPanel>
+        <ToolBar x:Name="PCTools"
+                 DockPanel.Dock="Top"/>
+        <StackPanel DockPanel.Dock="Bottom">
+            <Button x:Name="Close" Content="Close" />
+        </StackPanel>
         
-        <Grid Grid.Row="0"
-              Grid.ColumnSpan="3">
-            <TextBlock x:Name="DisplayName"
-                       FontSize="16"
-                       FontWeight="Bold"/>
-        </Grid>
+        <TabControl x:Name="PCTabs"
+                    VerticalAlignment="Stretch"
+                    TabStripPlacement="Left"
+                    Style="{StaticResource OutlookTabControlStyle}">
+            <TabItem Header="Client Details"></TabItem>
+            <TabItem Header="Advertisements"></TabItem>
+            <TabItem Header="Inventory"></TabItem>
+            <TabItem Header="Processes"></TabItem>
+        </TabControl>
         
-        <Grid Grid.Row="1">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Status:"
-                           Margin="2,2,2,2"/>
-                <TextBox x:Name="Status"
-                         IsReadOnly="True"
-                         Width="80"
-                         Margin="2,2,2,2"/>
-                <Button x:Name="Close" Content="Close" />
-            </StackPanel>
-            
-        </Grid>
-    </Grid>
+                    
+                
+        
+    </DockPanel>
+    
 </UserControl>

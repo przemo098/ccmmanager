@@ -8,7 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("caliburn.micro.dll")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("system.windows.interactivity.dll")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("apps-system-diagnosis.ico")]
 
 

@@ -1,16 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//CCMManager
+//Copyright (c) 2008 by Roger Zander
+//Copyright (c) 2011 by David Kamphuis
+//
+//   This file is part of CCMManager.
+//
+//    CCMManager is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+//
+//    Foobar is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Management;
 
-namespace CCMManager.Automation
+namespace CCMManager.Automation.SMS
 {
-    public class SMSSchedules
+    public class Schedules
     {
         #region Internal
 
-        WMIProvider oWMIPrivider;
+        WMI.Provider oWMIPrivider;
         ManagementClass mcSMSClass;
         ManagementBaseObject inParams;
         string sDCMScanSchedlueId;
@@ -20,12 +36,12 @@ namespace CCMManager.Automation
         #region Constructors
 
         /// <summary>
-        /// Default Constructor.  Initiates the WMIProvider object.
+        /// Default Constructor.  Initiates the Provider object.
         /// </summary>
-        /// <param name="oProvider">A WMIProvider object.</param>
-        public SMSSchedules(WMIProvider oProvider)
+        /// <param name="oProvider">A Provider object.</param>
+        public Schedules(WMI.Provider oProvider)
         {
-            oWMIPrivider = new WMIProvider(oProvider.mScope.Clone());
+            oWMIPrivider = new WMI.Provider(oProvider.mScope.Clone());
         }
 
         #endregion //Constructors
@@ -153,7 +169,7 @@ namespace CCMManager.Automation
 
         public void TriggerScheduleID(string scheduleId, bool updateHistory)
         {
-            WMIProvider oProvider = new WMIProvider(oWMIPrivider.mScope.Clone());
+            WMI.Provider oProvider = new WMI.Provider(oWMIPrivider.mScope.Clone());
             oProvider.mScope.Path.NamespacePath = @"ROOT\CCM";
             mcSMSClass = oProvider.GetClass("SMS_Client");
             inParams = mcSMSClass.GetMethodParameters("TriggerSchedule");
@@ -212,7 +228,7 @@ namespace CCMManager.Automation
         {
             get
             {
-                WMIProvider oProvider = new WMIProvider(oWMIPrivider.mScope.Clone());
+                WMI.Provider oProvider = new WMI.Provider(oWMIPrivider.mScope.Clone());
                 oProvider.mScope.Path.NamespacePath = @"ROOT\CCM\Scheduler";
                 ManagementObject mo = oProvider.GetObject("CCM_Scheduler_History.ScheduleID='{00000000-0000-0000-0000-000000000001}',UserSID='Machine'");
                 return ManagementDateTimeConverter.ToDateTime(mo.GetPropertyValue("LastTriggerTime").ToString());
@@ -223,7 +239,7 @@ namespace CCMManager.Automation
         {
             get
             {
-                WMIProvider oProvider = new WMIProvider(oWMIPrivider.mScope.Clone());
+                WMI.Provider oProvider = new WMI.Provider(oWMIPrivider.mScope.Clone());
                 oProvider.mScope.Path.NamespacePath = @"ROOT\CCM\Scheduler";
                 ManagementObject mo = oProvider.GetObject("CCM_Scheduler_History.ScheduleID='{00000000-0000-0000-0000-000000000002}',UserSID='Machine'");
                 return ManagementDateTimeConverter.ToDateTime(mo.GetPropertyValue("LastTriggerTime").ToString());
@@ -234,7 +250,7 @@ namespace CCMManager.Automation
         {
             get
             {
-                WMIProvider oProvider = new WMIProvider(oWMIPrivider.mScope.Clone());
+                WMI.Provider oProvider = new WMI.Provider(oWMIPrivider.mScope.Clone());
                 oProvider.mScope.Path.NamespacePath = @"ROOT\CCM\Scheduler";
                 ManagementObject mo = oProvider.GetObject("CCM_Scheduler_History.ScheduleID='{00000000-0000-0000-0000-000000000003}',UserSID='Machine'");
                 return ManagementDateTimeConverter.ToDateTime(mo.GetPropertyValue("LastTriggerTime").ToString());
@@ -245,7 +261,7 @@ namespace CCMManager.Automation
         {
             get
             {
-                WMIProvider oProvider = new WMIProvider(oWMIPrivider.mScope.Clone());
+                WMI.Provider oProvider = new WMI.Provider(oWMIPrivider.mScope.Clone());
                 oProvider.mScope.Path.NamespacePath = @"ROOT\CCM\Scheduler";
                 ManagementObject mo = oProvider.GetObject("CCM_Scheduler_History.ScheduleID='{00000000-0000-0000-0000-000000000021}',UserSID='Machine'");
                 return ManagementDateTimeConverter.ToDateTime(mo.GetPropertyValue("LastTriggerTime").ToString());
@@ -256,7 +272,7 @@ namespace CCMManager.Automation
         {
             get
             {
-                WMIProvider oProvider = new WMIProvider(oWMIPrivider.mScope.Clone());
+                WMI.Provider oProvider = new WMI.Provider(oWMIPrivider.mScope.Clone());
                 oProvider.mScope.Path.NamespacePath = @"ROOT\CCM\Scheduler";
                 ManagementObject mo = oProvider.GetObject("CCM_Scheduler_History.ScheduleID='{00000000-0000-0000-0000-000000000022}',UserSID='Machine'");
                 return ManagementDateTimeConverter.ToDateTime(mo.GetPropertyValue("LastTriggerTime").ToString());
@@ -267,7 +283,7 @@ namespace CCMManager.Automation
         {
             get
             {
-                WMIProvider oProvider = new WMIProvider(oWMIPrivider.mScope.Clone());
+                WMI.Provider oProvider = new WMI.Provider(oWMIPrivider.mScope.Clone());
                 oProvider.mScope.Path.NamespacePath = @"ROOT\CCM\Scheduler";
                 ManagementObject mo = oProvider.GetObject("CCM_Scheduler_History.ScheduleID='{00000000-0000-0000-0000-000000000108}',UserSID='Machine'");
                 return ManagementDateTimeConverter.ToDateTime(mo.GetPropertyValue("LastTriggerTime").ToString());

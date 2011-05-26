@@ -1,14 +1,33 @@
-﻿using System;
+﻿//CCMManager
+//Copyright (c) 2008 by Roger Zander
+//Copyright (c) 2011 by David Kamphuis
+//
+//   This file is part of CCMManager.
+//
+//    CCMManager is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+//
+//    Foobar is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
 using System.Management;
 
-namespace CCMManager.Automation
+namespace CCMManager.Automation.WMI
 {
     public class ComputerSystem
     {
         #region Internal
 
-        WMIProvider oWMIProvider;
+        WMI.Provider oWMIProvider;
         ManagementObject oWin32_OperatingSystem;
         ManagementObject oWin32_ComputerSystem;
         ManagementObjectCollection oWin32_SystemEnvironment;
@@ -18,7 +37,7 @@ namespace CCMManager.Automation
         
         #region Constructor
 
-        public ComputerSystem(WMIProvider oProvider)
+        public ComputerSystem(WMI.Provider oProvider)
         {
             oWMIProvider = oProvider;
         }
@@ -35,7 +54,7 @@ namespace CCMManager.Automation
             {
                 if ((oWin32_OperatingSystem == null) | Reload)
                 {
-                    WMIProvider oProvider = new WMIProvider(oWMIProvider.mScope.Clone());
+                    WMI.Provider oProvider = new WMI.Provider(oWMIProvider.mScope.Clone());
                     oProvider.mScope.Path.NamespacePath = @"Root\CIMV2";
                     oProvider.mScope.Options.EnablePrivileges = true;
                     ManagementObjectCollection moc = oProvider.ExecuteQuery("Select * from Win32_OperatingSystem");
@@ -60,7 +79,7 @@ namespace CCMManager.Automation
             {
                 if ((oWin32_ComputerSystem == null) | Reload)
                 {
-                    WMIProvider oProvider = new WMIProvider(oWMIProvider.mScope.Clone());
+                    WMI.Provider oProvider = new WMI.Provider(oWMIProvider.mScope.Clone());
                     oProvider.mScope.Path.NamespacePath = @"Root\CIMV2";
                     oProvider.mScope.Options.EnablePrivileges = true;
                     ManagementObjectCollection moc = oProvider.ExecuteQuery("Select * from Win32_ComputerSystem");
@@ -85,7 +104,7 @@ namespace CCMManager.Automation
             {
                 if ((oWin32_SystemEnvironment == null) | Reload)
                 {
-                    WMIProvider oProvider = new WMIProvider(oWMIProvider.mScope.Clone());
+                    WMI.Provider oProvider = new WMI.Provider(oWMIProvider.mScope.Clone());
                     oProvider.mScope.Path.NamespacePath = @"Root\CIMV2";
                     ManagementObjectCollection moc = oProvider.ExecuteQuery("select * from Win32_Environment where systemvariable='True'");
                     return moc;
@@ -136,6 +155,106 @@ namespace CCMManager.Automation
             return UInt32.Parse(outParams.GetPropertyValue("ReturnValue").ToString());
         }
 
+        public DateTime LastBootTime
+        {
+            get
+            {
+                ManagementObject mo = Win32_OperatingSystem;
+                return ManagementDateTimeConverter.ToDateTime(mo.GetPropertyValue("LastBootUpTime").ToString());
+            }
+        }
+
+        public DateTime OSInstallDate
+        {
+            get
+            {
+                ManagementObject mo = Win32_OperatingSystem;
+                return ManagementDateTimeConverter.ToDateTime(mo.GetPropertyValue("InstallDate").ToString());
+            }
+        }
+
+        public string SystemDriveLetter
+        {
+            get
+            {
+                ManagementObject mo = Win32_OperatingSystem;
+                return mo.GetPropertyValue("SystemDrive").ToString();
+            }
+        }
+
+        public string OSCaption
+        {
+            get
+            {
+                ManagementObject mo = Win32_OperatingSystem;
+                return mo.GetPropertyValue("Caption").ToString();
+            }
+        }
+
+        public string LoggedOnUser
+        {
+            get
+            {
+                ManagementObject mo = Win32_ComputerSystem;
+                //return Win32_ComputerSystem.GetPropertyValue("UserName").ToString();
+                return mo.GetPropertyValue("UserName").ToString();
+            }
+        }
+
+        public List<string> LoggedOnUsers
+        {
+            get
+            {
+                List<string> lResult = new List<string>();
+                if ((oUsersLoggedOn == null) | Reload)
+                {
+                    WMI.Provider oProvider = new WMI.Provider(oWMIProvider.mScope.Clone());
+                 	oProvider.mScope.Path.NamespacePath = @"ROOT\CIMV2";
+                    oProvider.mScope.Options.EnablePrivileges = true;
+                    ManagementObjectSearcher searcherLogonSessions = new ManagementObjectSearcher(oProvider.mScope, new ObjectQuery("select __relpath from win32_process where caption = 'explorer.exe'"));
+                    foreach (ManagementObject moLogonSession in searcherLogonSessions.Get())
+                    {
+                        try
+                        {
+                            ManagementBaseObject oMBO = moLogonSession.InvokeMethod("GetOwner", null, null);
+                            lResult.Add(oMBO["Domain"].ToString() + @"\" + oMBO["User"].ToString());
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                    return lResult;
+                }
+                else
+                {
+                    return oUsersLoggedOn;
+                }
+            }
+        }
+
+
+        //Hardware Details...
+
+        public string Manufacturer
+        {
+            get
+            {
+                ManagementObject mo = Win32_ComputerSystem;
+                return mo.GetPropertyValue("Manufacturer").ToString();
+            }
+        }
+
+        public string Model
+        {
+            get
+            {
+                ManagementObject mo = Win32_ComputerSystem;
+                return mo.GetPropertyValue("Model").ToString();
+            }
+        }
+
+        
         #endregion //Public Functions
     }
 }

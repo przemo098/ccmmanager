@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,10 +42,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComputerSystem.cs" />
+    <Compile Include="CCMClient.cs" />
+    <Compile Include="SMS\Components.cs" />
+    <Compile Include="SMS\DesiredConfigurationManagement.cs" />
+    <Compile Include="SMS\SoftwareDistribution.cs" />
+    <Compile Include="WMI\ComputerSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SMSSchedules.cs" />
-    <Compile Include="WMIProvider.cs" />
+    <Compile Include="SMS\Schedules.cs" />
+    <Compile Include="WMI\FileIO.cs" />
+    <Compile Include="WMI\Provider.cs" />
+    <Compile Include="WMI\Registry.cs" />
+    <Compile Include="WMI\Services.cs" />
+    <Compile Include="WMI\WindowsInstaller.cs" />
+    <Compile Include="WOL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LICENCE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,21 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//CCMManager
+//Copyright (c) 2011 by David Kamphuis
+//
+//   This file is part of CCMManager.
+//
+//    CCMManager is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+//
+//    Foobar is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.ComponentModel;
+using System.ComponentModel.Composition;
+using Caliburn.Micro;
+using CCMManager.Models;
+using CCMManager.Resources;
+using CCMManager.Services;
+
+//TODO: Add documentation to all properties, fields and methods. 
 namespace CCMManager.ViewModels
 {
-    using System.ComponentModel.Composition;
-    using System.Collections.ObjectModel;
-    using Caliburn.Micro;
-    using Framework;
-    using Models;
-    using Services;
-    using Resources;
-    using System.Threading;
-    using System.ComponentModel;
-   
-
     /// <summary>
     /// Defines a view to display the Classroom Editor Dialog
     /// </summary>
@@ -171,6 +181,15 @@ namespace CCMManager.ViewModels
                     break;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Delete the currently Selected Room.
+        /// </summary>
+        /// <param name="o"></param>
+        public void DeleteRoom(object o)
+        {
+            Classrooms.Remove(SelectedClassroom);
         }
 
         /// <summary>
