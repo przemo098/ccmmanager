@@ -78,6 +78,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\Caliburn.Micro.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Classic" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
@@ -354,6 +355,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Apps-system-diagnosis.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Automation\CCMManager.Automation.csproj">
+      <Project>{AE128657-F3CB-469D-968D-884457F45E90}</Project>
+      <Name>CCMManager.Automation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,96 +3,75 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             Width="300"
+             Height="300" xmlns:my="clr-namespace:CCMManager.Views">
     <UserControl.Resources>
-        <Style x:Key="OutlookTabControlStyle" TargetType="{x:Type TabControl}">
-            <Setter Property="Foreground"
-                    Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="Background"
-                    Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
-            <Setter Property="BorderBrush" Value=
-      "{x:Static Microsoft_Windows_Themes:ClassicBorderDecorator.ClassicBorderBrush}"/>
-            <Setter Property="BorderThickness" Value="3"/>
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="Padding" Value="1"/>
-            <Setter Property="MinWidth" Value="10"/>
-            <Setter Property="MinHeight" Value="10"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <SolidColorBrush x:Key="OutlookButtonForeground" Color="#FF204D89" />
+        <LinearGradientBrush x:Key="OutlookButtonBackground" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFD9EDFF" Offset="0"/>
+            <GradientStop Color="#FFC0DEFF" Offset="0.445"/>
+            <GradientStop Color="#FFC0D9FB" Offset="1"/>
+            <GradientStop Color="#FFAFD1F8" Offset="0.53"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="OutlookButtonHighlight" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFFFBD69" Offset="0"/>
+            <GradientStop Color="#FFFFB75A" Offset="0.0967"/>
+            <GradientStop Color="#FFFFB14C" Offset="0.2580"/>
+            <GradientStop Color="#FFFB8C3C" Offset="0.3870"/>
+            <GradientStop Color="#FFFEB461" Offset="0.9677"/>
+            <GradientStop Color="#FFFEBB67" Offset="1"/>
+        </LinearGradientBrush>
+        <ControlTemplate x:Key="OutlookBar" TargetType="{x:Type TabControl}">
+            <ControlTemplate.Resources>
+                <SolidColorBrush x:Key="BorderBrush" Color="#6593CF"/>
+                <SolidColorBrush x:Key="CaptionBrush" Color="#6593CF" />
+                <LinearGradientBrush x:Key="LabelBrush" StartPoint="0, 0" EndPoint="0,1">
+                    <GradientStop Color="#E3EFFF" Offset="0" />
+                    <GradientStop Color="#AFD2FF" Offset="1" />
+                </LinearGradientBrush>
+
+            </ControlTemplate.Resources>
+            <Border BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="1"
+                        SnapsToDevicePixels="True">
+                <DockPanel>
+                    <StackPanel IsItemsHost="True" DockPanel.Dock="Left" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <ContentPresenter Content="{TemplateBinding SelectedContent}" />
+                </DockPanel>
+
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Foreground"
+                            Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style x:Key="OutlookTabItemStyle" TargetType="{x:Type TabItem}">
+            <Setter Property="Padding" Value="12,2,12,2" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabControl}">
-                        <Grid ClipToBounds="true" SnapsToDevicePixels="true"
-                      KeyboardNavigation.TabNavigation="Local">
-                            <Grid.RowDefinitions>
-                                <RowDefinition x:Name="RowDefinition0" Height="Auto"/>
-                                <RowDefinition x:Name="RowDefinition1" Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition x:Name="ColumnDefinition0"/>
-                                <ColumnDefinition x:Name="ColumnDefinition1" Width="0"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid x:Name="ContentPanel" Grid.Column="0" Grid.Row="1"
-                        KeyboardNavigation.DirectionalNavigation="Contained"
-                        KeyboardNavigation.TabIndex="2"
-                        KeyboardNavigation.TabNavigation="Local">
-                                <Microsoft_Windows_Themes:ClassicBorderDecorator
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderStyle="Raised"
-                        BorderThickness="{TemplateBinding BorderThickness}">
-                                    <ContentPresenter SnapsToDevicePixels=
-                            "{TemplateBinding SnapsToDevicePixels}" Margin="2,2,2,2"
-                            x:Name="PART_SelectedContentHost"
-                            ContentSource="SelectedContent"/>
-                                </Microsoft_Windows_Themes:ClassicBorderDecorator>
-                            </Grid>
-                            <StackPanel HorizontalAlignment="Stretch" Margin="0,-2,0,0"
-                    x:Name="HeaderPanel" VerticalAlignment="Bottom" Width="Auto" 
-                Height="Auto" Grid.Row="1" IsItemsHost="True"/>
-                        </Grid>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Border SnapsToDevicePixels="True" x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="1"
+                                BorderBrush="#FF6593CF">
+                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              Margin="{TemplateBinding Padding}"
+                                              VerticalAlignment="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                              ContentSource="Header"
+                                              RecognizesAccessKey="True"
+                                              HorizontalAlignment="Left"/>
+                        </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="TabStripPlacement" Value="Bottom">
-                                <Setter Property="Grid.Row"
-                        TargetName="ContentPanel" Value="0"/>
-                                <Setter Property="Height"
-                            TargetName="RowDefinition0" Value="*"/>
-                                <Setter Property="Height"
-                            TargetName="RowDefinition1" Value="Auto"/>
-                            </Trigger>
-                            <Trigger Property="TabStripPlacement" Value="Left">
-                                <Setter Property="Grid.Row"
-                            TargetName="ContentPanel" Value="0"/>
-                                <Setter Property="Grid.Column"
-                            TargetName="ContentPanel" Value="1"/>
-                                <Setter Property="Width"
-                            TargetName="ColumnDefinition0" Value="Auto"/>
-                                <Setter Property="Width"
-                            TargetName="ColumnDefinition1" Value="*"/>
-                                <Setter Property="Height"
-                            TargetName="RowDefinition0" Value="*"/>
-                                <Setter Property="Height"
-                            TargetName="RowDefinition1" Value="0"/>
-                            </Trigger>
-                            <Trigger Property="TabStripPlacement" Value="Right">
-                                <Setter Property="Grid.Row"
-                            TargetName="ContentPanel" Value="0"/>
-                                <Setter Property="Grid.Column"
-                            TargetName="ContentPanel" Value="0"/>
-                                <Setter Property="Width"
-                            TargetName="ColumnDefinition0" Value="*"/>
-                                <Setter Property="Width"
-                            TargetName="ColumnDefinition1" Value="Auto"/>
-                                <Setter Property="Height"
-                            TargetName="RowDefinition0" Value="*"/>
-                                <Setter Property="Height"
-                            TargetName="RowDefinition1" Value="0"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Foreground"
-                            Value="{DynamicResource
-                            {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            <Trigger Property="Selector.IsSelected" Value="True">
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource OutlookButtonHighlight}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -101,25 +80,36 @@
         </Style>
     </UserControl.Resources>
     <DockPanel>
-        <ToolBar x:Name="PCTools"
-                 DockPanel.Dock="Top"/>
         <StackPanel DockPanel.Dock="Bottom">
             <Button x:Name="Close" Content="Close" />
         </StackPanel>
-        
-        <TabControl x:Name="PCTabs"
-                    VerticalAlignment="Stretch"
-                    TabStripPlacement="Left"
-                    Style="{StaticResource OutlookTabControlStyle}">
-            <TabItem Header="Client Details"></TabItem>
-            <TabItem Header="Advertisements"></TabItem>
-            <TabItem Header="Inventory"></TabItem>
-            <TabItem Header="Processes"></TabItem>
+
+        <TabControl x:Name="PCControl" Template="{StaticResource OutlookBar}">
+            <TabItem Header="Client Agent"
+                     Height="30"
+                     Style="{DynamicResource OutlookTabItemStyle}"
+                     Background="{DynamicResource OutlookButtonBackground}"
+                     Foreground="{DynamicResource OutlookButtonForeground}">
+                <TextBlock>SomeTexthere...</TextBlock>
+            </TabItem>
+            <TabItem Header="Advertisments"
+                     Height="30"
+                     Style="{DynamicResource OutlookTabItemStyle}"
+                     Background="{DynamicResource OutlookButtonBackground}"
+                     Foreground="{DynamicResource OutlookButtonForeground}">
+
+            </TabItem>
+            <TabItem Header="Processes"
+                     Height="30"
+                     Style="{DynamicResource OutlookTabItemStyle}"
+                     Background="{DynamicResource OutlookButtonBackground}"
+                     Foreground="{DynamicResource OutlookButtonForeground}"/>
+            <TabItem Header="Inventory"
+                     Height="30"
+                     Style="{DynamicResource OutlookTabItemStyle}"
+                     Background="{DynamicResource OutlookButtonBackground}"
+                     Foreground="{DynamicResource OutlookButtonForeground}"/>
         </TabControl>
-        
-                    
-                
-        
     </DockPanel>
-    
+
 </UserControl>

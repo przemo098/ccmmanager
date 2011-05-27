@@ -92,6 +92,10 @@ namespace CCMManager.Models.Actions
             {
                 return null;
             }
+            finally
+            {
+                GC.Collect();
+            }
             return oMs;
         }
 
@@ -105,11 +109,17 @@ namespace CCMManager.Models.Actions
                 inParams["sScheduleID"] = triggerID;
                 outMPParams = cls.InvokeMethod("TriggerSchedule", inParams, null);
                 cls.Dispose();
+                outMPParams.Dispose();
+                inParams.Dispose();
                 return true;
             }
             catch
             {
                 return false;
+            }
+            finally
+            {
+                GC.Collect();
             }
         }
     }

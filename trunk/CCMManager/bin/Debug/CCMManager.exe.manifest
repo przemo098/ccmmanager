@@ -44,6 +44,18 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Automation.dll" size="66560">
+      <assemblyIdentity name="Automation" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>2M8Qlz6ZroSXwnxlBTyixkdESmA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Caliburn.Micro.dll" size="89088">
       <assemblyIdentity name="Caliburn.Micro" version="1.0.0.0" publicKeyToken="8E5891231F2ED21F" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -56,14 +68,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CCMManager.exe" size="748032">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CCMManager.exe" size="751104">
       <assemblyIdentity name="CCMManager" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Bll+bsVDR4607d4cA5qmq7kRR5E=</dsig:DigestValue>
+        <dsig:DigestValue>QJXHh2rXfQM9mcpC29CVIsJIEn0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

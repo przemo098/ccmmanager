@@ -124,7 +124,7 @@ namespace CCMManager.Models
             this.Parent = computer.Parent;
             this.Status = ComputerStates.Unknown;
             this.Actions = new BindableCollection<RemoteAction>();
-            this.CurrentStatusImage = new BitmapImage(new Uri("pack://application:,,,/Images/system-help-3.png"));
+            //this.CurrentStatusImage = new BitmapImage(new Uri("pack://application:,,,/Images/system-help-3.png"));
             //this.ActionStatus = "Blank";
         }
 

@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCMManager", "CCMManager\CC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCMManager.Automation", "Automation\CCMManager.Automation.csproj", "{AE128657-F3CB-469D-968D-884457F45E90}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCMManager.SingleClient", "CCMManager.SingleClient\CCMManager.SingleClient.csproj", "{B30C7646-03FB-48DE-BC47-E815D000F802}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,16 @@ Global
 		{AE128657-F3CB-469D-968D-884457F45E90}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{AE128657-F3CB-469D-968D-884457F45E90}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{AE128657-F3CB-469D-968D-884457F45E90}.Release|x86.ActiveCfg = Release|Any CPU
+		{B30C7646-03FB-48DE-BC47-E815D000F802}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B30C7646-03FB-48DE-BC47-E815D000F802}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{B30C7646-03FB-48DE-BC47-E815D000F802}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{B30C7646-03FB-48DE-BC47-E815D000F802}.Debug|x86.ActiveCfg = Debug|x86
+		{B30C7646-03FB-48DE-BC47-E815D000F802}.Debug|x86.Build.0 = Debug|x86
+		{B30C7646-03FB-48DE-BC47-E815D000F802}.Release|Any CPU.ActiveCfg = Release|x86
+		{B30C7646-03FB-48DE-BC47-E815D000F802}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{B30C7646-03FB-48DE-BC47-E815D000F802}.Release|Mixed Platforms.Build.0 = Release|x86
+		{B30C7646-03FB-48DE-BC47-E815D000F802}.Release|x86.ActiveCfg = Release|x86
+		{B30C7646-03FB-48DE-BC47-E815D000F802}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -34,7 +34,7 @@ namespace CCMManager.Models
             {
                 _state = value;
                 NotifyOfPropertyChange(() => State);
-                NotifyOfPropertyChange(() => CurrentActionImage);
+                //NotifyOfPropertyChange(() => CurrentActionImage);
             }
         }
 
@@ -49,10 +49,10 @@ namespace CCMManager.Models
             }
         }
 
-        public ImageSource CurrentStatusImage
-        {
-            get { return Images[State]; }
-        }
+        //public ImageSource CurrentStatusImage
+        //{
+        //    get { return Images[State]; }
+        //}
 
         #endregion //Properties and Backing Fields
 
@@ -67,10 +67,12 @@ namespace CCMManager.Models
 
         #region Constructors
 
-        public RemoteStatusAction(Dictionary<ComputerStates, ImageSource> images)
+        public RemoteStatusAction(Dictionary<ComputerStates, ImageSource> images = null)
         {
             this.State = ComputerStates.Unknown;
             this.Images = images;
+            
+            
         }
 
         #endregion //Constructors

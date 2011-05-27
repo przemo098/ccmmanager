@@ -25,7 +25,7 @@ namespace CCMManager.Models.Actions
 {
     public class StatusAction : RemoteStatusAction
     {
-        public StatusAction(Dictionary<ComputerStates, ImageSource> imgs)
+        public StatusAction(Dictionary<ComputerStates, ImageSource> imgs = null)
             :base(imgs)
         {
 
@@ -61,11 +61,7 @@ namespace CCMManager.Models.Actions
             }
             finally
             {
-                //dispose of the wmiobjects.
-                App.Current.Dispatcher.BeginInvoke(new Action(() =>
-                            {
-                                client.CurrentStatusImage = this.CurrentStatusImage;
-                            }), null);
+                GC.Collect();
             }
             //Do the Task Here...
         }

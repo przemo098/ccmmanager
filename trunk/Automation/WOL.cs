@@ -1,5 +1,4 @@
 ﻿//CCMManager
-//Copyright (c) 2008 by Roger Zander
 //Copyright (c) 2011 by David Kamphuis
 //
 //   This file is part of CCMManager.
