@@ -189,31 +189,32 @@ namespace CCMManager.ViewModels
             //{
                 //_statusPoller.Start(SelectedClassroom.Computers.ToList<ActionsHomeModel>());
             //}
-            List<Task> tasks = new List<Task>();
-            Dictionary<ComputerStates, ImageSource> StatusPics = new Dictionary<ComputerStates, ImageSource>();
-            var imgOnline = new BitmapImage(new Uri("pack://application:,,,/Images/network-idle.png"));
-            var imgOffline = new BitmapImage(new Uri("pack://application:,,,/Images/network-wired-3.png"));
-            var imgLoggedOn = new BitmapImage(new Uri("pack://application:,,,/Images/identity.png"));
-            var imgError = new BitmapImage(new Uri("pack://application:,,,/Images/network-error.png"));
-            var imgAccessError = new BitmapImage(new Uri("pack://application:,,,/Images/object-locked.png"));
-            var imgUnknown = new BitmapImage(new Uri("pack://application:,,,/Images/system-help-3.png"));
-            StatusPics.Add(ComputerStates.Online, imgOnline as ImageSource);
-            StatusPics.Add(ComputerStates.LoggedOn, imgLoggedOn as ImageSource);
-            StatusPics.Add(ComputerStates.Offline, imgOffline as ImageSource);
-            StatusPics.Add(ComputerStates.DNSError, imgError as ImageSource);
-            StatusPics.Add(ComputerStates.Broken, imgError as ImageSource);
-            StatusPics.Add(ComputerStates.AccessDenied, imgAccessError as ImageSource);
-            StatusPics.Add(ComputerStates.Unknown, imgUnknown as ImageSource);
+            //List<Task> tasks = new List<Task>();
+            //Dictionary<ComputerStates, ImageSource> StatusPics = new Dictionary<ComputerStates, ImageSource>();
+            //var imgOnline = new BitmapImage(new Uri("pack://application:,,,/Images/network-idle.png"));
+            //var imgOffline = new BitmapImage(new Uri("pack://application:,,,/Images/network-wired-3.png"));
+            //var imgLoggedOn = new BitmapImage(new Uri("pack://application:,,,/Images/identity.png"));
+            //var imgError = new BitmapImage(new Uri("pack://application:,,,/Images/network-error.png"));
+            //var imgAccessError = new BitmapImage(new Uri("pack://application:,,,/Images/object-locked.png"));
+            //var imgUnknown = new BitmapImage(new Uri("pack://application:,,,/Images/system-help-3.png"));
+            //StatusPics.Add(ComputerStates.Online, imgOnline as ImageSource);
+            //StatusPics.Add(ComputerStates.LoggedOn, imgLoggedOn as ImageSource);
+            //StatusPics.Add(ComputerStates.Offline, imgOffline as ImageSource);
+            //StatusPics.Add(ComputerStates.DNSError, imgError as ImageSource);
+            //StatusPics.Add(ComputerStates.Broken, imgError as ImageSource);
+            //StatusPics.Add(ComputerStates.AccessDenied, imgAccessError as ImageSource);
+            //StatusPics.Add(ComputerStates.Unknown, imgUnknown as ImageSource);
 
             foreach (ActionsHomeModel c in SelectedClassroom.Computers)
             {
-                StatusAction sa = new StatusAction(StatusPics);
+                //StatusAction sa = new StatusAction(StatusPics);
+                StatusAction sa = new StatusAction();
                 ActionsHomeModel pc = c;
                 var t = Task.Factory.StartNew(() =>
                     {
                         sa.Execute(pc);
                     });
-                tasks.Add(t);
+                //tasks.Add(t);
             }
         }
 

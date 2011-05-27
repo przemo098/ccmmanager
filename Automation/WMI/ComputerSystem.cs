@@ -30,6 +30,7 @@ namespace CCMManager.Automation.WMI
         WMI.Provider oWMIProvider;
         ManagementObject oWin32_OperatingSystem;
         ManagementObject oWin32_ComputerSystem;
+        ManagementObject oWin32_NetworkAdapter;
         ManagementObjectCollection oWin32_SystemEnvironment;
         List<string> oUsersLoggedOn;
 
@@ -37,6 +38,10 @@ namespace CCMManager.Automation.WMI
         
         #region Constructor
 
+        /// <summary>
+        /// Default Constructor.
+        /// </summary>
+        /// <param name="oProvider">A WMI Provider instance.</param>
         public ComputerSystem(WMI.Provider oProvider)
         {
             oWMIProvider = oProvider;
@@ -46,8 +51,14 @@ namespace CCMManager.Automation.WMI
 
         #region Properties
 
+        /// <summary>
+        /// Define wether the properties require reloading.
+        /// </summary>
         public bool Reload { get; set; }
 
+        /// <summary>
+        /// Return the Win32_OperatingSystem ManagementObject.
+        /// </summary>
         public ManagementObject Win32_OperatingSystem
         {
             get
@@ -73,6 +84,9 @@ namespace CCMManager.Automation.WMI
             }
         }
 
+        /// <summary>
+        /// Return the Win32_ComputerSystem ManagementObject.
+        /// </summary>
         public ManagementObject Win32_ComputerSystem
         {
             get
@@ -80,7 +94,7 @@ namespace CCMManager.Automation.WMI
                 if ((oWin32_ComputerSystem == null) | Reload)
                 {
                     WMI.Provider oProvider = new WMI.Provider(oWMIProvider.mScope.Clone());
-                    oProvider.mScope.Path.NamespacePath = @"Root\CIMV2";
+                    oProvider.mScope.Path.NamespacePath = @"ROOT\CIMV2";
                     oProvider.mScope.Options.EnablePrivileges = true;
                     ManagementObjectCollection moc = oProvider.ExecuteQuery("Select * from Win32_ComputerSystem");
                     foreach (ManagementObject mo in moc)
@@ -98,6 +112,34 @@ namespace CCMManager.Automation.WMI
             }
         }
 
+        public ManagementObject Win32_NetworkAdapter
+        {
+            get
+            {
+                if ((oWin32_NetworkAdapter == null) | Reload)
+                {
+                    WMI.Provider oProvider = new WMI.Provider(oWMIProvider.mScope.Clone());
+                    oProvider.mScope.Path.NamespacePath = @"ROOT\CIMV2";
+                    oProvider.mScope.Options.EnablePrivileges = true;
+                    ManagementObjectCollection moc = oProvider.ExecuteQuery("Select * from Win32_NetworkAdapter");
+                    foreach (ManagementObject mo in moc)
+                    {
+                        oWin32_NetworkAdapter = mo;
+                        Reload = false;
+                        return mo;
+                    }
+                    return null;
+                }
+                else
+                {
+                    return oWin32_NetworkAdapter;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Return the Win32_Environment ManagementObject.
+        /// </summary>
         public ManagementObjectCollection Win32_Environment
         {
             get
@@ -116,6 +158,9 @@ namespace CCMManager.Automation.WMI
             }
         }
 
+        /// <summary>
+        /// Return the Windows Directory.
+        /// </summary>
         public string WindowsDir
         {
             get
@@ -124,37 +169,10 @@ namespace CCMManager.Automation.WMI
                 return mo.GetPropertyValue("WindowsDirectory").ToString();
             }
         }
-        #endregion //Properties
 
-        #region Public Functions
-
-        public UInt32 Logoff()
-        {
-            ManagementObject mo = Win32_OperatingSystem;
-            ManagementBaseObject inParams = mo.GetMethodParameters("Win32Shutdown");
-            inParams["Flags"] = 4; //Logoff
-            ManagementBaseObject outParams = mo.InvokeMethod("Win32Shutdown", inParams, null);
-            return UInt32.Parse(outParams.GetPropertyValue("ReturnValue").ToString());
-        }
-
-        public UInt32 Restart() 
-        {
-            ManagementObject mo = Win32_OperatingSystem;
-            ManagementBaseObject inParams = mo.GetMethodParameters("Win32Shutdown");
-            inParams["Flags"] = 6; //forced restart
-            ManagementBaseObject outParams = mo.InvokeMethod("Win32Shutdown", inParams, null);
-            return UInt32.Parse(outParams.GetPropertyValue("ReturnValue").ToString());
-        }
-
-        public UInt32 Shutdown() 
-        {
-            ManagementObject mo = Win32_OperatingSystem;
-            ManagementBaseObject inParams = mo.GetMethodParameters("Win32Shutdown");
-            inParams["Flags"] = 12; //Forced poweroff
-            ManagementBaseObject outParams = mo.InvokeMethod("Win32Shutdown", inParams, null);
-            return UInt32.Parse(outParams.GetPropertyValue("ReturnValue").ToString());
-        }
-
+        /// <summary>
+        /// Return the Last System Boot Date/Time.
+        /// </summary>
         public DateTime LastBootTime
         {
             get
@@ -164,6 +182,9 @@ namespace CCMManager.Automation.WMI
             }
         }
 
+        /// <summary>
+        /// Return the Date of the last OS Installation.
+        /// </summary>
         public DateTime OSInstallDate
         {
             get
@@ -173,6 +194,9 @@ namespace CCMManager.Automation.WMI
             }
         }
 
+        /// <summary>
+        /// Return the System Drive Letter.
+        /// </summary>
         public string SystemDriveLetter
         {
             get
@@ -182,6 +206,9 @@ namespace CCMManager.Automation.WMI
             }
         }
 
+        /// <summary>
+        /// Return the OSCaption.
+        /// </summary>
         public string OSCaption
         {
             get
@@ -191,6 +218,9 @@ namespace CCMManager.Automation.WMI
             }
         }
 
+        /// <summary>
+        /// Return the currently logged on username.
+        /// </summary>
         public string LoggedOnUser
         {
             get
@@ -201,6 +231,9 @@ namespace CCMManager.Automation.WMI
             }
         }
 
+        /// <summary>
+        /// Return a List<string> of Logged on users.
+        /// </summary>
         public List<string> LoggedOnUsers
         {
             get
@@ -209,7 +242,7 @@ namespace CCMManager.Automation.WMI
                 if ((oUsersLoggedOn == null) | Reload)
                 {
                     WMI.Provider oProvider = new WMI.Provider(oWMIProvider.mScope.Clone());
-                 	oProvider.mScope.Path.NamespacePath = @"ROOT\CIMV2";
+                    oProvider.mScope.Path.NamespacePath = @"ROOT\CIMV2";
                     oProvider.mScope.Options.EnablePrivileges = true;
                     ManagementObjectSearcher searcherLogonSessions = new ManagementObjectSearcher(oProvider.mScope, new ObjectQuery("select __relpath from win32_process where caption = 'explorer.exe'"));
                     foreach (ManagementObject moLogonSession in searcherLogonSessions.Get())
@@ -233,9 +266,9 @@ namespace CCMManager.Automation.WMI
             }
         }
 
-
-        //Hardware Details...
-
+        /// <summary>
+        /// Return the Manufacturer.
+        /// </summary>
         public string Manufacturer
         {
             get
@@ -245,6 +278,9 @@ namespace CCMManager.Automation.WMI
             }
         }
 
+        /// <summary>
+        /// Return the Model.
+        /// </summary>
         public string Model
         {
             get
@@ -254,7 +290,59 @@ namespace CCMManager.Automation.WMI
             }
         }
 
-        
-        #endregion //Public Functions
+        public List<string> MACAddresses
+        {
+            get
+            {
+                ManagementObject mo = Win32_ComputerSystem;
+                return new List<string>();
+            }
+        }
+
+        #endregion //Properties
+
+        #region Public Functions
+
+        /// <summary>
+        /// Force a Logoff.
+        /// </summary>
+        /// <returns>Returns the result code (UInt32)</returns>
+        public UInt32 Logoff()
+        {
+            ManagementObject mo = Win32_OperatingSystem;
+            ManagementBaseObject inParams = mo.GetMethodParameters("Win32Shutdown");
+            inParams["Flags"] = 4; //Logoff
+            ManagementBaseObject outParams = mo.InvokeMethod("Win32Shutdown", inParams, null);
+            return UInt32.Parse(outParams.GetPropertyValue("ReturnValue").ToString());
+        }
+
+        /// <summary>
+        /// Force a restart.
+        /// </summary>
+        /// <returns>Returns the result code (UInt32)</returns>
+        public UInt32 Restart() 
+        {
+            ManagementObject mo = Win32_OperatingSystem;
+            ManagementBaseObject inParams = mo.GetMethodParameters("Win32Shutdown");
+            inParams["Flags"] = 6; //forced restart
+            ManagementBaseObject outParams = mo.InvokeMethod("Win32Shutdown", inParams, null);
+            return UInt32.Parse(outParams.GetPropertyValue("ReturnValue").ToString());
+        }
+
+        /// <summary>
+        /// Force a PowerOff.
+        /// </summary>
+        /// <returns>Returns the result code (UInt32)</returns>
+        public UInt32 Shutdown() 
+        {
+            ManagementObject mo = Win32_OperatingSystem;
+            ManagementBaseObject inParams = mo.GetMethodParameters("Win32Shutdown");
+            inParams["Flags"] = 12; //Forced poweroff
+            ManagementBaseObject outParams = mo.InvokeMethod("Win32Shutdown", inParams, null);
+            return UInt32.Parse(outParams.GetPropertyValue("ReturnValue").ToString());
+        }
+
+        #endregion
+
     }
 }

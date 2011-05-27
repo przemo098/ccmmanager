@@ -22,12 +22,10 @@ using System.Management;
 using System.Net.NetworkInformation;
 using System.Text;
 using CCMManager.Models;
-
+using CCMManager.Automation.WMI;
 namespace CCMManager.Services
 {
-    
-
-    public class WMIProvider
+    public class WMIProvider : IDisposable
     {
         ManagementPath oCCMPath;
         ManagementPath oRootPath;
@@ -36,15 +34,17 @@ namespace CCMManager.Services
         string Hostname = null;
         private string LoggedOnUserName = null;
         private List<string> _macAddresses = new List<string>();
+        //private Provider oProv;
 
         public WMIProvider(string hostname)
         {
             oRootPath = new ManagementPath(string.Format("\\\\{0}\\ROOT\\CIMV2", hostname));
-            oCCMPath = new ManagementPath(string.Format("\\\\{0}\\ROOT\\CCM", hostname));
+            //oCCMPath = new ManagementPath(string.Format("\\\\{0}\\ROOT\\CCM", hostname));
             oCon.Impersonation = ImpersonationLevel.Impersonate;
             oCon.EnablePrivileges = true;
             oRootMs = new ManagementScope(oRootPath, oCon);
             this.Hostname = hostname;
+            //oProv = new Provider(oRootPath.NamespacePath);
             
         }
 
@@ -52,34 +52,41 @@ namespace CCMManager.Services
         
         public ComputerStates GetHostStatus()
         {
-            ComputerStates state = ComputerStates.Unknown;
-            if (PingHost() == true)
+            try
             {
-                state = ComputerStates.Online;
-                state = HostAccessOk();
-                if (state == ComputerStates.Online)
+                ComputerStates state = ComputerStates.Unknown;
+                if (PingHost() == true)
                 {
-                    if (!HostDNSIsCorrect())
+                    state = ComputerStates.Online;
+                    state = HostAccessOk();
+                    if (state == ComputerStates.Online)
                     {
-                        state = ComputerStates.DNSError;
-                    }
-                    else
-                    {
-                        //DNS Ok, get userstate...
-                        if (HostHasUser())
+                        if (!HostDNSIsCorrect())
                         {
-                            state = ComputerStates.LoggedOn;
+                            state = ComputerStates.DNSError;
                         }
-                        // Get MAC Addresses...
-                        this.GetHostMACAddresses();
+                        else
+                        {
+                            //DNS Ok, get userstate...
+                            if (HostHasUser())
+                            {
+                                state = ComputerStates.LoggedOn;
+                            }
+                            // Get MAC Addresses...
+                            this.GetHostMACAddresses();
+                        }
                     }
                 }
+                else
+                {
+                    state = ComputerStates.Offline;
+                }
+                return state;
             }
-            else
+            finally
             {
-                state = ComputerStates.Offline;
+                
             }
-            return state;
         }
         
         private ComputerStates HostAccessOk()
@@ -115,32 +122,40 @@ namespace CCMManager.Services
             string data = "";
             byte[] buffer = Encoding.ASCII.GetBytes(data);
 
-            int timeout = 120;
+            int timeout = 400;
             try
             {
                 PingReply reply = pingSender.Send(this.Hostname, timeout, buffer, options);
                 if (reply.Status == IPStatus.Success)
                 {
+                    pingSender.Dispose();
                     return true;
                 }
                 else
                 {
+                    pingSender.Dispose();
                     return false;
                 }
             }
             catch
             {
+                pingSender.Dispose();
                 return false;
             }
         }
 
         private bool HostDNSIsCorrect()
         {
+            //ComputerSystem cs = new ComputerSystem(oProv);
+            //ManagementObject mo1 = cs.Win32_ComputerSystem;
+            //mo1.GetPropertyValue("DNSHostName").ToString();
+
+            ObjectQuery oQuery = new ObjectQuery("SELECT DNSHostName FROM Win32_ComputerSystem");
+            ManagementObjectSearcher oSearcher = new ManagementObjectSearcher(oRootMs, oQuery);
+            
             try
             {
                 //Check that the remote host is the current right one!
-                ObjectQuery oQuery = new ObjectQuery("SELECT DNSHostName FROM Win32_ComputerSystem");
-                ManagementObjectSearcher oSearcher = new ManagementObjectSearcher(oRootMs, oQuery);
                 ManagementObjectCollection moc = oSearcher.Get();
                 if (moc.Count != 0)
                 {
@@ -149,29 +164,38 @@ namespace CCMManager.Services
                         string result = mo["DNSHostName"].ToString();
                         if (result.ToLower() == Hostname.ToLower())
                         {
+                            mo.Dispose();
+                            moc.Dispose();
                             return true;
                         }
                         else
                         {
+                            mo.Dispose();
+                            moc.Dispose();
                             return false;
                         }
                     }
                 }
+                moc.Dispose();
                 return false;
             }
             catch
             {
                 return false;
             }
+            finally
+            {
+                oSearcher.Dispose();
+            }
         }
 
         private bool HostHasUser()
         {
+            //Check that the remote host is the current right one!
+            ObjectQuery oQuery = new ObjectQuery("SELECT UserName FROM Win32_ComputerSystem");
+            ManagementObjectSearcher oSearcher = new ManagementObjectSearcher(oRootMs, oQuery);
             try
             {
-                //Check that the remote host is the current right one!
-                ObjectQuery oQuery = new ObjectQuery("SELECT UserName FROM Win32_ComputerSystem");
-                ManagementObjectSearcher oSearcher = new ManagementObjectSearcher(oRootMs, oQuery);
                 ManagementObjectCollection moc = oSearcher.Get();
                 if (moc.Count != 0)
                 {
@@ -181,10 +205,12 @@ namespace CCMManager.Services
                         if (result != "")
                         {
                             this.LoggedOnUserName = result;
+                            mo.Dispose();
                             return true;
                         }
                     }
                 }
+                moc.Dispose();
                 return false;
             }
             catch
@@ -192,27 +218,38 @@ namespace CCMManager.Services
                 this.LoggedOnUserName = null;
                 return false;
             }
+            finally
+            {
+                oSearcher.Dispose();
+            }
         }
 
         private void GetHostMACAddresses()
         {
+            ObjectQuery oQuery = new ObjectQuery("SELECT MACAddress FROM win32_networkadapter WHERE MACAddress != null and NetEnabled = TRUE");
+            ManagementObjectSearcher oSearcher = new ManagementObjectSearcher(oRootMs, oQuery);
             try
             {
                 //Check that the remote host is the current right one!
-                ObjectQuery oQuery = new ObjectQuery("SELECT MACAddress FROM win32_networkadapter WHERE MACAddress != null and NetEnabled = TRUE");
-                ManagementObjectSearcher oSearcher = new ManagementObjectSearcher(oRootMs, oQuery);
+
                 ManagementObjectCollection moc = oSearcher.Get();
                 if (moc.Count != 0)
                 {
                     foreach (ManagementObject mo in moc)
                     {
                         this._macAddresses.Add(mo["MACAddress"].ToString());
+                        mo.Dispose();
                     }
                 }
+                moc.Dispose();
             }
             catch
             {
-                
+
+            }
+            finally
+            {
+                oSearcher.Dispose();
             }
         }
 
@@ -226,5 +263,10 @@ namespace CCMManager.Services
             return _macAddresses;
         }
 
+
+        public void Dispose()
+        {
+            GC.Collect();
+        }
     }
 }

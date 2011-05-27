@@ -8,9 +8,8 @@
                 <ResourceDictionary>
                     <local:CustomBootstrapper x:Key="bootstrapper" />
                 </ResourceDictionary>
-                <ResourceDictionary Source="Resources\ShellResources.xaml" />
+                <ResourceDictionary Source="Resources\ShellResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-        
     </Application.Resources>
 </Application>

@@ -195,11 +195,26 @@
                             <DataTemplate>
                                 <Image x:Name="StatusImage"
                                        ToolTip="{Binding Status}" 
-                                       Source="{Binding CurrentStatusImage}"
+                                       Source="/CCMManager;component/Images/system-help-3.png"
                                        Width="16"/>
                                 <DataTemplate.Triggers>
                                     <DataTrigger Binding="{Binding Status}" Value="LoggedOn">
                                         <Setter TargetName="StatusImage" Property="ToolTip" Value="{Binding LoggedOnUser}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Status}" Value="LoggedOn">
+                                        <Setter TargetName="StatusImage" Property="Source" Value="/CCMManager;component/Images/identity.png"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Status}" Value="Online">
+                                        <Setter TargetName="StatusImage" Property="Source" Value="/CCMManager;component/Images/network-idle.png"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Status}" Value="AccessDenied">
+                                        <Setter TargetName="StatusImage" Property="Source" Value="/CCMManager;component/Images/object-locked.png"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Status}" Value="Offline">
+                                        <Setter TargetName="StatusImage" Property="Source" Value="/CCMManager;component/Images/network-wired-3.png"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Status}" Value="DNSError">
+                                        <Setter TargetName="StatusImage" Property="Source" Value="/CCMManager;component/Images/network-error.png"/>
                                     </DataTrigger>
                                 </DataTemplate.Triggers>
                             </DataTemplate>

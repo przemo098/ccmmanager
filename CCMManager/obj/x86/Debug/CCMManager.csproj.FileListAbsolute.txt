@@ -10,7 +10,6 @@ C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Resources\ShellResources
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\ActionsComputerView.baml
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\ActionsHomeView.baml
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\ActionsView.baml
-C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\ComputerDetailsView.baml
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\ShellView.baml
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Resources\AddClassroomDialog.g.cs
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\ActionsComputerView.g.cs
@@ -24,6 +23,7 @@ C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\GeneratedInternalTypeHel
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\CCMManager_MarkupCompile.cache
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\CCMManager_MarkupCompile.lref
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\App.baml
+C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\ComputerDetailsView.baml
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\Views\EditorView.baml
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\CCMManager.g.resources
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\CCMManager.Properties.Resources.resources
@@ -33,3 +33,5 @@ C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\CCMManager.exe.manifest
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\CCMManager.application
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\CCMManager.exe
 C:\Data\Projects\C#\CCMManager\CCMManager\obj\x86\Debug\CCMManager.pdb
+C:\Data\Projects\C#\CCMManager\CCMManager\bin\Debug\Automation.dll
+C:\Data\Projects\C#\CCMManager\CCMManager\bin\Debug\Automation.pdb

@@ -81,6 +81,12 @@ namespace CCMManager.Models.Actions
                                 this.State = RemoteActionState.Error;
                             }), null);
                         }
+                        finally
+                        {
+                            mo.Dispose();
+                            moc.Dispose();
+                            GC.Collect();
+                        }
                     }
                 }
             }
@@ -112,6 +118,10 @@ namespace CCMManager.Models.Actions
             {
                 return null;
             }
+            finally
+            {
+                GC.Collect();
+            }
             return oMs;
         }
 
@@ -125,11 +135,17 @@ namespace CCMManager.Models.Actions
                 inParams["sScheduleID"] = triggerID;
                 outMPParams = cls.InvokeMethod("TriggerSchedule", inParams, null);
                 cls.Dispose();
+                inParams.Dispose();
+                outMPParams.Dispose();
                 return true;
             }
             catch
             {
                 return false;
+            }
+            finally
+            {
+                GC.Collect();
             }
         }
     }
